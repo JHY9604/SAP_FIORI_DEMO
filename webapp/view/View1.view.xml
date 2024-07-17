@@ -1,0 +1,777 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m" controllerName="BOND_TEST3.controller.View1" displayBlock="true">
+	<App>
+	<pages>
+		<Page id="oPage" title="NOA ATS">
+
+			<Panel headerText="거래개요">
+				<content>
+					<VBox>
+						<Button text="조회" width="100px" press="onSelect"/>
+					</VBox>
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="leftVBoxStyle">
+							<Label text="회사코드" labelFor="companyCode"/>
+							<Input id="companyCode" width="100%" showValueHelp="true" valueHelpRequest="onCocdHelp"/>
+							
+<!-- ********************************Cocd Value Help DIALOG Start***************************** -->
+							<Dialog id="HCompanyCode" title="회사코드">
+    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="CoCdTable" items="{/HT001Set}">
+    					    	<columns>
+    					    		<Column>
+    					    			<Text text="CoCd"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="회사이름"/>
+    					    		</Column>
+    					    	</columns>
+    					    <items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Text text="{Bukrs}"/>
+										<Text text="{Butxt}"/>
+									</cells>
+								</ColumnListItem>    					    	
+    					    </items>
+    					    </Table>
+    					    
+ 
+    						<beginButton>
+        						<Button text="OK" press="onCocdOk"/>
+    						</beginButton>
+    						
+    						<endButton>
+        						<Button text="Cancel" press="onCocdCancel"/>
+    						</endButton>
+    					</Dialog>									
+									
+<!-- ********************************Cocd Value Help DIALOG End***************************** -->								
+						</VBox>		
+						
+						<VBox class="leftVBoxStyle">
+							<items>
+					    		<Text text="No text specified" id="__text11"/>
+							</items>
+						</VBox>
+
+                		<VBox class="rightVBoxStyle">
+                    		<Label text="BDC 모드" labelFor="bdcMode"/>
+							  <ComboBox id="bdcMode" width="200px" placeholder="Select an item">
+							      <core:Item key="1" text="모든화면조회"/>
+							      <core:Item key="2" text="오류조회"/>
+							      <core:Item key="3" text="백그라운드처리"/>
+							       <core:Item key="3" text="백그라운드처리:디버깅기능"/>
+							  </ComboBox>
+						</VBox>
+					<!--<items>-->
+					
+					<!--</items>-->
+					
+					</HBox>
+					
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="leftVBoxStyle">
+							<Label text="종목ID" labelFor="securityId"/>
+							<Input id="securityId" submit="onReadBdClass" showValueHelp="true" valueHelpRequest="onSecurityHelp"/>
+							
+<!-- ********************************종목ID Value Help DIALOG Start***************************** -->		
+							<Dialog id="HSecurity" title="종목ID">
+							<SearchField id="securitySearch" search="onSecuritySearch"/>
+    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="securityTable" items="{/ZhcfmcmranlBdSet}">
+    					    	<columns>
+    					    		<Column>
+    					    			<Text text="종목ID"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="긴 이름"/>
+    					    		</Column>
+    					    	</columns>
+    					    <items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Text text="{Ranl}"/>
+										<Text text="{Xallb}"/>
+									</cells>
+								</ColumnListItem>    					    	
+    					    </items>
+    					    </Table>
+    					    
+ 
+    						<beginButton>
+        						<Button text="OK" press="onSecurityOk"/>
+    						</beginButton>
+    						
+    						<endButton>
+        						<Button text="Cancel" press="onSecurityCancel"/>
+    						</endButton>
+    					</Dialog>	
+
+<!-- ********************************종목ID Value Help DIALOG End***************************** -->								
+						</VBox>
+						
+						<VBox class="rightVBoxStyle">
+							<Label text="상태" labelFor="status"/>
+							  <ComboBox id="status" width="200px" placeholder="Select an item" items="{ path: '/ZDSTATUSSet' }">
+							  	<core:Item key="{Code}" text="{Text}"/>
+							  </ComboBox>
+						</VBox>
+					</HBox>
+					
+				<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox>
+							<Label text="상품유형" labelFor="productType"/>
+							<Input id="productType" showValueHelp="true" valueHelpRequest="onPTypeHelp"/>
+							
+<!-- ********************************상품유형 Value Help DIALOG Start***************************** -->							
+							<Dialog id="HPtype" title="상품유형">
+    					    <SearchField id="searchField" search="onPTypSearch"/>
+
+    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="pTypTable" items="{/HTzpaSet}">
+    					    	<columns>
+    					    		<Column>
+    					    			<Text text="PTyp"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="텍스트"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="계약유형"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="PrC"/>
+    					    		</Column>    					    		
+    					    	</columns>
+    					    	
+    					    	<items>
+									<ColumnListItem vAlign="Middle">
+										<cells>
+											<Text text="{Gsart}"/>
+											<Text text="{Ltx}"/>
+											<Text text="{Rantyp}"/>
+											<Text text="{Sanlf}"/>											
+										</cells>
+									</ColumnListItem>    					    	
+    					    	</items>
+    					    </Table>
+
+    						<beginButton>
+        						<Button text="OK" press="onPTypeOk"/>
+    						</beginButton>
+    						
+    						<endButton>
+        						<Button text="Cancel" press="onPTypeCancel"/>
+    						</endButton>
+    					</Dialog>
+<!-- ********************************상품유형 Value Help DIALOG End***************************** -->								
+							
+    					
+						</VBox>
+						
+						
+						<VBox>
+							<Label text="거래번호" labelFor="dealNumber"/>
+							<Input id="dealNumber" submit="onSelect" showValueHelp="true" valueHelpRequest="onRfhaHelp" />
+							
+							<Dialog id="HRfha" title="거래번호">
+    					    <SearchField id="rfhaSearchField" search="onRfhaSearch"/>
+    					    
+    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="dealNumberTable" items="{/HRfhaSet}">
+    					    	<columns>
+    					    		<Column>
+    					    			<Text text="거래번호"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="표준코드"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="종목명"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="거래유형"/>
+    					    		</Column>    
+    					    		<Column>
+    					    			<Text text="거래일"/>
+    					    		</Column> 
+    					    		<Column>
+    					    			<Text text="거래처명"/>
+    					    		</Column> 
+    					    		<Column>
+    					    			<Text text="종목코드"/>
+    					    		</Column> 
+    					    		<Column>
+    					    			<Text text="유가증권계정"/>
+    					    		</Column> 
+    					    		<Column>
+    					    			<Text text="입력자"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="최종수정자"/>
+    					    		</Column>
+    					    	</columns>
+    					    	
+    					    	<items>
+									<ColumnListItem vAlign="Middle">
+										<cells>
+											<Text text="{Rfha}"/>
+											<Text text="{Isin}"/>
+											<Text text="{SecurityIdT}"/>
+											<Text text="{SfhaartT}"/>
+											<Text text="{PositionDate}"/>
+											<Text text="{NameOrg1}"/>
+											<Text text="{Ranl}"/>
+											<Text text="{Rldepo}"/>
+											<Text text="{Cruser}"/>
+											<Text text="{Upuser}"/>
+										</cells>
+									</ColumnListItem>    					    	
+    					    	</items>
+    					    </Table>
+
+    						<beginButton>
+        						<Button text="OK" press="onRfhaOk"/>
+    						</beginButton>
+    						
+    						<endButton>
+        						<Button text="Cancel" press="onRfhaCancel"/>
+    						</endButton>
+    					</Dialog>
+						</VBox>
+						
+						<VBox class="rightVBoxStyle">
+							<Label text="데이터구분" labelFor="zdataSrc"/>
+							  <ComboBox id="zdataSrc" width="200px" placeholder="Select an item" items="{ path: '/ZDDATASRCSet' }">
+							  	<core:Item key="{Code}" text="{Text}"/>
+							      <!--<core:Item key="1" text="직접입력"/>-->
+							      <!--<core:Item key="2" text="수탁사"/>-->
+							      <!--<core:Item key="3" text="Migration"/>-->
+							      <!--<core:Item key="3" text="예탁원"/>-->
+							      <!--<core:Item key="3" text="투자알림"/>-->
+							  </ComboBox>							
+						</VBox>
+					</HBox>
+					
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="leftVBoxStyle">
+							<Label text="거래유형" labelFor="sfhaart"/>
+							<Input id="sfhaart" showValueHelp="true" valueHelpRequest="onSfhaartHelp"/>
+						<!--</VBox>-->
+						
+<!-- ********************************거래유형 Value Help DIALOG Start***************************** -->							
+							<Dialog id="SfhaartDialog" title="거래유형">
+    					    <SearchField id="sfhaartSearch" search="onSfhaartSearch"/>
+
+    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="sfhaartTable" items="{/HsfhaartSet}">
+    					    	<columns>
+    					    		<Column>
+    					    			<Text text="PTyp"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="TTyp"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="거래유형이름"/>
+    					    		</Column>
+    					    	</columns>
+    					    	
+    					    	<items>
+									<ColumnListItem vAlign="Middle">
+										<cells>
+											<Text text="{Sgsart}"/>
+											<Text text="{Sfhaart}"/>
+											<Text text="{Xtext}"/>
+										</cells>
+									</ColumnListItem>    					    	
+    					    	</items>
+    					    </Table>
+
+    						<beginButton>
+        						<Button text="OK" press="onSfhhartOk"/>
+    						</beginButton>
+    						
+    						<endButton>
+        						<Button text="Cancel" press="onSfhhartCancel"/>
+    						</endButton>
+    					</Dialog>
+    					</VBox>
+<!-- ********************************거래유형 Value Help DIALOG End***************************** -->
+						
+						<VBox class="rightBoxStyle">
+							<Label text="구,포지션ID" labelFor="expId"/>
+							<Input id="expId"/>
+						</VBox>
+					</HBox>	
+				</content>
+			</Panel>
+			
+		<HBox>
+			<Panel>
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="거래일" labelFor="tradingDate"/>
+							<DatePicker width="100%" id="tradingDate"/>
+							<!--<Input id="tradingDate"/>-->
+						</VBox>
+						<ToolbarSpacer width="20px"/>
+						<VBox class="leftBoxStyle">
+							<Label text="결제일" labelFor="payMentDate"/>
+							<DatePicker width="100%" id="payMentDate"/>
+							<!--<Input id="cashDate"/>-->
+						</VBox>
+					</HBox>
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="통화" labelFor="curr"/>
+							<Input id="curr"/>
+						</VBox>
+					</HBox>
+					
+						<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+							<VBox class="leftBoxStyle">
+								<Label text=""/>
+								<Label text=""/>
+								<Label text="액면" labelFor="nominalAmt"/>
+								<Input id="nominalAmt"/>
+							</VBox>
+							
+							<VBox class="leftBoxStyle">
+								<Label text=""/>
+								<Label text=""/>
+								<Label text=""/>
+								<Button text="펀드배분" class="fund" press="onFund"/>
+							</VBox>
+							
+							<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+								<VBox class="Box">
+									<Label text="계산구분" class="label" labelFor="GroupA"/>
+										<RadioButtonGroup id="GroupA">
+											<RadioButton text="단가" selected="true"/>
+											<RadioButton class="button" text="수익률"/>
+										</RadioButtonGroup>
+								</VBox>										
+							</HBox>
+						</HBox>
+						
+						<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+							<VBox class="leftBoxStyle">
+								<Label text="수익률" labelFor="rrate"/>
+								<Input id="rrate"/>
+								
+								<Label text="%" class="percent"/>
+
+								<Label text="계산단가" labelFor="zprice1"/>
+								<Input id="zprice1"/>
+
+								<Label text="단가조정" labelFor="zprice4"/>
+								<Input id="zprice4"/>
+							</VBox>
+						</HBox>
+						<HBox>
+							<VBox>
+								<Button text="계산" class="cal" press="onCal"/>
+								
+								<Label text="적용단가" labelFor="zprice2"/>
+								<Input id="zprice2"/>
+							</VBox>
+						<VBox>
+								<CheckBox text="10,000단가" selected="" class="per"/>
+							</VBox>
+						</HBox>
+						
+					<HBox>
+						<VBox>
+							<Label text="시가"/>
+							<Input/>
+						</VBox> 
+						<VBox>
+								<CheckBox text="계산제외" selected="" class="per"/>
+							</VBox>						
+					</HBox>
+					
+						<HBox>
+							<VBox>
+								<Label text="매매금액" labelFor="tradeAmt"/>
+								<Input id="tradeAmt"/>
+								<Label text="KRW" class="KRW"/>
+								<Label/>
+								<Label/>
+								<Label/>
+								<Label/>
+								<Label/>
+			
+							</VBox>
+						</HBox>
+						
+						<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+							<VBox class="rightBoxStyle">
+								<Label text="정산금액" labelFor="settleAmt"/>
+								<Input placeholder="포지션통화" id="settleAmt"/>
+							</VBox>
+							
+							<VBox class="leftBoxStyle">
+								<Label text="　" labelFor="settleKAmt"/>
+								<Input placeholder="현지통화" id="settleKAmt" class="KAmt"/>
+							</VBox>
+						</HBox>
+						<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+							<VBox class="rightBoxStyle">
+								<Label text="경과이자" labelFor="ininAmt"/>
+								<Input id="ininAmt"/>
+							</VBox>
+							
+							<VBox class="leftBoxStyle">
+								<Label text="　" labelFor="ininKAmt"/>
+								<Input id="ininKAmt"  class="Amt"/>
+							</VBox>
+						</HBox>
+						
+						<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+							<VBox class="rightBoxStyle">
+								<Label text="거래처" labelFor="kontrh"/>
+								<Input id="kontrh"/>
+							</VBox>
+						</HBox>
+						
+						<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+							<VBox class="rightBoxStyle">
+								<Label text="당사계좌"/>
+								<Input id="hbkid" showValueHelp="true" valueHelpRequest="onHbkidHelp"/>
+<!-- ********************************당사계좌 Value Help DIALOG Start***************************** -->	
+							<Dialog id="HHbkid" title="당사계좌">
+    					    <SearchField id="searchField2" search="onHbkidSearch"/>
+    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="hbkidTable" items="{/HT012Set}">
+    					    	<columns>
+    					    		<Column>
+    					    			<Text text="거래은행"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="계정ID"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="은행 계좌"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="내역"/>
+    					    		</Column>
+    					    	</columns>
+    					    <items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Text text="{Hbkid}"/>
+										<Text text="{Hktid}"/>
+										<Text text="{Bankn}"/>
+										<Text text="{Text1}"/>
+									</cells>
+								</ColumnListItem>    					    	
+    					    </items>
+    					    </Table>
+    					    
+    						<beginButton>
+        						<Button text="OK" press="onHbkidOk"/>
+    						</beginButton>
+    						
+    						<endButton>
+        						<Button text="Cancel" press="onHbkidCancel"/>
+    						</endButton>
+    					</Dialog>
+<!-- ********************************당사계좌 Value Help DIALOG End***************************** -->	
+							</VBox>
+							<VBox class="bottom">
+								<!--<Label text="　"/ labelFor="hktid">-->
+								
+							<!--<ComboBox id="hktid" width="200px" placeholder="Select an item" items="{ path: '/HT012kSet', orter: { path: 'text' }}">-->
+							<!--	<core:Item key="{Hktid}" text="{Text1}"/>-->
+							<!--</ComboBox>-->
+							<items>
+							    <Input xmlns="sap.m" id="hktid" showValueHelp="true" valueHelpRequest="onHktidHelp" />
+							</items>
+							</VBox>
+						</HBox>						
+						
+						<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+							<VBox class="rightBoxStyle">
+								<Label text="예탁처" labelFor="sglzb"/>
+								<Input id="sglzb"/>
+								
+								<Label text="결제계좌" labelFor="accNo"/>
+								<Input id="accNo"/>
+								<Button text="결제계좌지정" class="account"/>
+							</VBox>
+						</HBox>
+						
+			</Panel>
+
+			<ToolbarSpacer width="280px"/>
+			
+			<Panel headerText="관리정보">
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="leftVBoxStyle">
+							<Label text="계정구분" labelFor="portfolio"/>
+							<Input id="portfolio" showValueHelp="true" valueHelpRequest="onPortDialog"/>
+						</VBox>
+					</HBox>
+					
+<!-- ********************************계정구분 Value Help DIALOG Start*************************** -->
+					<Dialog id="portDialog" title="계정구분">
+    			    <Table mode="SingleSelectMaster" selectionChange="onPortTable" id="portTable" items="{/ZhcfmcmRportbSet}">
+    			    	<columns>
+    			    		<Column>
+    			    			<Text text="포트폴리오"/>
+    			    		</Column>
+    			    		<Column>
+    			    			<Text text="포트폴리오 이름"/>
+    			    		</Column>
+    			    	</columns>
+    			    <items>
+						<ColumnListItem vAlign="Middle">
+							<cells>
+								<Text text="{Rportb}"/>
+								<Text text="{Xportb}"/>
+							</cells>
+						</ColumnListItem>    					    	
+    			    </items>
+    			    </Table>
+    			    
+    				<beginButton>
+        				<Button text="OK" press="onPortOk"/>
+    				</beginButton>
+    				
+    				<endButton>
+        				<Button text="Cancel" press="onPortCancel"/>
+    				</endButton>
+    			</Dialog>
+<!-- ********************************계정구분 Value Help DIALOG End***************************** -->
+					
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="운용펀드" labelFor="accountGroup"/>
+							<Input id="accountGroup"/>
+						</VBox>
+					</HBox>	
+					
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="운용역" labelFor="manager"/>
+							<Input id="manager" showValueHelp="true" valueHelpRequest="onManagerHelp"/>
+						</VBox>
+					</HBox>
+					
+<!-- ********************************운용역 Value Help DIALOG Start*************************** -->
+					<Dialog id="managerDialog" title="계정구분">
+    			    <Table mode="SingleSelectMaster" selectionChange="onManagerTable" id="managerTable" items="{/ZhmanagerSet}">
+    			    	<columns>
+    			    		<Column>
+    			    			<Text text="운용역"/>
+    			    		</Column>
+    			    		<Column>
+    			    			<Text text="운용역 이름"/>
+    			    		</Column>
+    			    	</columns>
+    			    <items>
+						<ColumnListItem vAlign="Middle">
+							<cells>
+								<Text text="{Manager}"/>
+								<Text text="{Manager_nm}"/>
+							</cells>
+						</ColumnListItem>    					    	
+    			    </items>
+    			    </Table>
+    			    
+    				<beginButton>
+        				<Button text="OK" press="onManagerOk"/>
+    				</beginButton>
+    				
+    				<endButton>
+        				<Button text="Cancel" press="onManagerCancle"/>
+    				</endButton>
+    			</Dialog>
+<!-- ********************************운용역 Value Help DIALOG End***************************** -->					
+					
+					
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="운용부서" labelFor="operPart"/>
+							  <ComboBox id="operPart" width="200px" placeholder="Select an item">
+							      <core:Item key="1" text="직접입력"/>
+							  </ComboBox>	
+						</VBox>
+						
+						<ToolbarSpacer width="20px"/>
+						
+						<VBox class="leftBoxStyle">
+							<Label text="사용자" labelFor="crnam"/>
+							<Input id="crnam"/>
+						</VBox>
+					</HBox>
+					
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="유가증권계정" labelFor="securityAccount"/>
+							<Input id="securityAccount"/>
+						</VBox>
+						
+						<VBox class="leftBoxStyle">
+							<Label text="매입결제일" labelFor="buyDate"/>
+							<Input id="buyDate"/>
+						</VBox>
+					</HBox>
+					
+					<Panel headerText="금융상품분류">
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="leftBoxStyle">
+							<Label text="지분채무구분" labelFor="stBdGbn"/>
+							  <ComboBox id="stBdGbn" width="200px" placeholder="Select an item" items="{ path: '/ZDStBdGbnSet' }">
+							      <core:Item key="{Code}" text="{Text}"/>
+							  </ComboBox>
+						</VBox>
+						<ToolbarSpacer width="20px"/>
+						<VBox class="rightBoxStyle">
+							<Label text="FVOCI 지정여부" labelFor="fvociYn"/>
+							  <ComboBox id="fvociYn" width="200px" placeholder="Select an item" items="{ path: '/ZDFvociYnSet' }">
+							      <core:Item key="{Code}" text="{Text}"/>
+							  </ComboBox>
+
+						</VBox>
+					</HBox>
+					
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="FVOCI 지정사유" class="fvociRe" labelFor="fvociRsn"/>
+							  <ComboBox id="fvociRsn" width="200px" placeholder="Select an item" items="{ path: '/ZDFvociRsnSet' }">
+							      <core:Item key="{Code}" text="{Text}"/>
+							  </ComboBox>
+						</VBox>
+					</HBox>
+					
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="기타사유" class="etcRe" labelFor="arsnText"/>
+							  <ComboBox id="arsnText" width="200px" placeholder="Select an item" class="fvociInput">
+							      <core:Item key="1" text="직접입력"/>
+							  </ComboBox>
+						</VBox>
+					</HBox>	
+
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="보유목적" labelFor="comValClass"/>
+							<Input width="210%" id="comValClass"/>
+						</VBox>
+					</HBox>	
+					
+					
+					</Panel>
+				
+				<Panel headerText="종목정보">
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="유가증권분류" labelFor="xsecClass"/>
+							<Input width="210%" id="xsecClass"/>
+						</VBox>
+					</HBox>						
+
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="채권분류" labelFor="xbondClass"/>
+							<Input id="xbondClass"/>
+							<!--<Label text="채권분류" labelFor="xbondClass"/>-->
+							<!--<ComboBox id="xbondClasse" width="200px" placeholder="Select an item" items="{ path: '/ZhcfmBbcdSet', orter: { path: 'text' }}">-->
+							<!--	<core:Item key="{Bbcd}" text="{Bbcdnm}"/>-->
+							<!--</ComboBox>-->
+						</VBox>
+						<VBox class="leftBoxStyle">
+							<Label text="일수계산방법" labelFor="szbmeth"/>
+							  <ComboBox id="szbmeth" width="200px" placeholder="Select an item">
+							      <core:Item key="1" text="직접입력"/>
+							  </ComboBox>
+						</VBox>
+					</HBox>	
+
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="이자지급방법" labelFor="itcd"/>
+							<Input width="20%" id="itcd"/>
+							<!--<Label text="이표채" class="cuponBond"/>-->
+						</VBox>
+						<VBox class="leftBoxStyle">
+							<Label text="이자지급계산주기" labelFor="ittm"/>
+							<Input width="20%" id="ittm"/>
+							<Label text="개월" class="cuponBond"/>							
+						</VBox>
+					</HBox>	
+					
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="발행일" labelFor="issueDate"/>
+							<!--<Input id="issueDate"/>-->
+							<DatePicker width="100%" id="issueDate"/>
+						</VBox>
+						<VBox class="leftBoxStyle">
+							<Label text="만기일"/>
+							<DatePicker width="100%" id="eddt"/>
+							<!--<Input/>-->
+						</VBox>
+					</HBox>						
+					
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="표면이자율" labelFor="cupr"/>
+							<Input width="90%" id="cupr"/>
+							<Label text="%" class="rate"/>
+						</VBox>
+						<VBox class="leftBoxStyle">
+							<Label text="FRN RATE1" labelFor="zfrate1"/>
+							<Input width="90%" id="zfrate1"/>
+						</VBox>
+					</HBox>						
+					
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="할인율" labelFor="ipyohal01"/>
+							<Input width="90%" id="ipyohal01"/>
+							<Label text="%" class="rate"/>
+						</VBox>
+						<VBox class="leftBoxStyle">
+							<Label text="FRN RATE2" labelFor="zfrate2"/>
+							<Input width="90%" id="zfrate2"/>
+							
+						</VBox>
+					</HBox>						
+					
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="FRN계산식"/>
+							<Input width="210%"/>
+						</VBox>
+					</HBox>
+					
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="FRN참조금리 "/>
+							<Input/>
+						</VBox>
+						<VBox class="leftBoxStyle">
+							<Label text="최초이자지급일" labelFor="hidt"/>
+							<DatePicker width="100%" id="hidt"/>
+							<!--<Input id="hidt"/>-->
+						</VBox>
+					</HBox>						
+					
+					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
+						<VBox class="rightBoxStyle">
+							<Label text="표준코드 " labelFor="isin"/>
+							<Input id="isin"/>
+						</VBox>
+						<VBox class="leftBoxStyle">
+							<Label text="상환방법" labelFor="xrfmd"/>
+							<Input id="xrfmd"/>
+						</VBox>
+					</HBox>						
+					
+				</Panel>
+				
+			</Panel>
+		
+		</HBox>
+		</Page>
+	</pages>
+</App>
+</mvc:View>
