@@ -426,9 +426,54 @@
 						<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 							<VBox class="rightBoxStyle">
 								<Label text="거래처" labelFor="kontrh"/>
-								<Input id="kontrh"/>
+								<Input id="kontrh" showValueHelp="true" valueHelpRequest="onKontrhHelp"/>
 							</VBox>
 						</HBox>
+						
+<!-- ********************************거래처 Value Help DIALOG Start*************************** -->	
+						<Dialog id="kontrhDialog" title="거래처">
+    					    <SearchField id="kontrhSearch" search="onKontrhSearch"/>
+    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="kontrhTable" items="{/ZhkonrthSet}">
+    					    	<columns>
+    					    		<Column>
+    					    			<Text text="Partner"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="Name 1"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="Name 2"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="F0004"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="F0005"/>
+    					    		</Column>    					    		
+    					    	</columns>
+    					    <items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Text text="{Partner}"/>
+										<Text text="{NameOrg1}"/>
+										<Text text="{NameOrg2}"/>							
+										<Text text="{BuSort1}"/>
+										<Text text="{BuSort2}"/>
+									
+									</cells>
+								</ColumnListItem>    					    	
+    					    </items>
+    					    </Table>
+    					    
+    						<beginButton>
+        						<Button text="OK" press="onKontrhOk"/>
+    						</beginButton>
+    						
+    						<endButton>
+        						<Button text="Cancel" press="onKontrhCancle"/>
+    						</endButton>
+    					</Dialog>
+<!-- ********************************거래처 Value Help DIALOG End***************************** -->	
 						
 						<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 							<VBox class="rightBoxStyle">

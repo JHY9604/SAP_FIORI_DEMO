@@ -556,7 +556,47 @@ sap.ui.define([
 	
 	onManagerCancle: function(oEvent){
 		this.onDialogClose("managerDialog");
-	}
+	},
 //////////////////////////////////////////////////////////////////운용역 Value Help - E
+
+//////////////////////////////////////////////////////////////////거래처 Value Help - S
+	onKontrhHelp: function(oEvent){
+		this.onDialogOpen("kontrhDialog");
+	},
+	onKontrhOk: function(oEvent){
+		var SelectedData = this.onDialogOk("kontrhTable");
+		var oData = SelectedData.Partner;
+		
+		if(oData){
+			this.getView().byId("kontrh").setValue(oData);
+		}
+		this.onDialogClose("kontrhDialog");
+	},
+	onKontrhCancle: function(oEvent){
+		this.onDialogClose("kontrhDialog");
+	},
+	
+	onKontrhSearch: function(oEvent){
+    	var aFilter = [];
+    	var sQuery = oEvent.getParameter("query");
+    	if (sQuery) {
+    	   aFilter.push(new Filter("Partner", FilterOperator.Contains, sQuery));
+    	   aFilter.push(new Filter("NameOrg1", FilterOperator.Contains, sQuery));
+    	} else {
+    		 aFilter.push(new Filter("Partner", FilterOperator.Contains, sQuery));
+    	}
+    	   
+    	var oFilter = new Filter({
+    	         filters: aFilter,
+    	         and: false // 'false'는 OR 조건을 의미
+    	      });
+    	   
+    	  // filter binding
+    	var oTable = this.byId("kontrhTable");
+    	var oBinding = oTable.getBinding("items");
+    	  oBinding.filter(oFilter);	
+	}
+
+//////////////////////////////////////////////////////////////////거래처 Value Help - E
 	});
 });
