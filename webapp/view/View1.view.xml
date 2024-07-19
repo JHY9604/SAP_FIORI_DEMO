@@ -157,7 +157,7 @@
 <!-- ********************************상품유형 Value Help DIALOG End***************************** -->								
 						<VBox>
 							<Label text="거래번호" labelFor="dealNumber"/>
-							<Input id="dealNumber" submit="onSelect" showValueHelp="true" valueHelpRequest="onRfhaHelp" />
+							<Input id="dealNumber" submit="onSelect" showValueHelp="true" valueHelpRequest="onRfhaHelp"/>
 							
 							<Dialog id="HRfha" title="거래번호">
     					    <SearchField id="rfhaSearchField" search="onRfhaSearch"/>
@@ -295,15 +295,17 @@
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="rightBoxStyle">
 							<Label text="거래일" labelFor="tradingDate"/>
-							<DatePicker width="100%" id="tradingDate"/>
+							<DatePicker width="100%" id="tradingDate" valueFormat="yyyyMMdd"/>
 							<!--<Input id="tradingDate"/>-->
 						</VBox>
+						<CheckBox id="realTrade"/>
 						<ToolbarSpacer width="20px"/>
 						<VBox class="leftBoxStyle">
 							<Label text="결제일" labelFor="payMentDate"/>
-							<DatePicker width="100%" id="payMentDate"/>
+							<DatePicker width="100%" id="payMentDate" valueFormat="yyyyMMdd"/>
 							<!--<Input id="cashDate"/>-->
 						</VBox>
+					<items/>
 					</HBox>
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="rightBoxStyle">
@@ -328,10 +330,10 @@
 							
 							<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 								<VBox class="Box">
-									<Label text="계산구분" class="label" labelFor="GroupA"/>
-										<RadioButtonGroup id="GroupA">
-											<RadioButton text="단가" selected="true"/>
-											<RadioButton class="button" text="수익률"/>
+									<Label text="계산구분" class="label" labelFor="calType"/>
+										<RadioButtonGroup id="calType">
+											<RadioButton text="단가" id="xzprice11" selected="true"/>
+											<RadioButton class="button" id="xzprice22" text="수익률"/>
 										</RadioButtonGroup>
 								</VBox>										
 							</HBox>
@@ -414,7 +416,7 @@
 							
 							<VBox class="leftBoxStyle">
 								<Label text="　" labelFor="ininKAmt"/>
-								<Input id="ininKAmt"  class="Amt"/>
+								<Input id="ininKAmt" class="Amt"/>
 							</VBox>
 						</HBox>
 						
@@ -524,7 +526,7 @@
 							<!--	<core:Item key="{Hktid}" text="{Text1}"/>-->
 							<!--</ComboBox>-->
 							<items>
-							    <Input xmlns="sap.m" id="hktid" showValueHelp="true" valueHelpRequest="onHktidHelp" />
+							    <Input xmlns="sap.m" id="hktid" showValueHelp="true" valueHelpRequest="onHktidHelp"/>
 							</items>
 							</VBox>
 						</HBox>						

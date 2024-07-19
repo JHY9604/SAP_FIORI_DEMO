@@ -5,15 +5,16 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator"
 ], function(Controller,JSONModel,Filter, FilterOperator) {
 	"use strict";
+	
+	var oMainModel;
 
 	return Controller.extend("BOND_TEST3.controller.View1", {
 		
 		onInit: function () {
 			
     	var sUrl = "/sap/opu/odata/sap/ZPJ_BDTRAN_TEST_SRV/";
-    	var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
-    	this.getView().setModel(oModel);
-    
+    	oMainModel = new sap.ui.model.odata.ODataModel(sUrl, true);
+    	this.getView().setModel(oMainModel);
 		},
 		
 	// 종목조회
@@ -24,8 +25,7 @@ sap.ui.define([
             	alert("null");
             }
             else{
-            	// TEST - JHYKJSDLFJLSDLFKJSDFLKJSDFLJ
-            	// alert(securityId);
+
 				var oModelDetail = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZPJ_BOND_TEST_SRV/");
 				var sPath = "/Z_BDCLASSSet(SecurityId='" + securityId + "')";
 				var that = this;
@@ -36,8 +36,7 @@ sap.ui.define([
 					// alert("ok!!");
 					
 					var data = oData;
-					console.log(data);
-					// console.log(">>>>"+this);
+					that.byId("productType").setValue(data.ProductType); //상품유형
 					that.byId("xsecClass").setValue(data.XsecClass); //유가증권분류
 					that.byId("xbondClass").setValue(data.XbondClass); //채권분류
 					that.byId("szbmeth").setValue(data.Szbmeth); //일수계산방법
@@ -65,84 +64,26 @@ sap.ui.define([
             
 		},
 		
-		// //상품유형 다이얼로그
-		// onValueHelpRequest: function (oEvent) {
-  //  	var oView = this.getView();
-  //  	var oDialog = oView.byId("valueHelpDialog");
-
-  //  	// 다이얼로그를 열어줍니다.
-  //  	oDialog.open();
-  //  },
-    
-    // // dialog ok button
-    // onValueHelpOk: function (oEvent) {
-    //   var oSelectedItem = this.getView().byId("valueHelpList").getSelectedItem();
-    //   if (oSelectedItem) {
-    //     var sCustomerId = oSelectedItem.getDescription();
-    //     this.getView().byId("productType").setValue(sCustomerId);
-    //   }
-    //   this.getView().byId("valueHelpDialog").close();
-    // },
-	
-	// // dialog cancel button
- //   onValueHelpCancel: function (oEvent) {
- //     this.getView().byId("valueHelpDialog").close();
- //   },
-    
-  //  // dialog search button
-  //  onSearch: function (oEvent) {
-		// // build filter array
-		// var aFilter = [];
-		// var sQuery = oEvent.getParameter("query");
-		
-		// console.log(sQuery);
-		// if (sQuery) {
-		// 	aFilter.push(new Filter("Gsart", FilterOperator.Contains, sQuery));
-		// 	aFilter.push(new Filter("Ltx", FilterOperator.Contains, sQuery));
-		// }
-		// else{
-		// 	aFilter.push(new Filter("Gsart", FilterOperator.Contains, sQuery));
-		// }
-			
-		// var oFilter = new Filter({
-  //             filters: aFilter,
-  //             and: false // 'false'는 OR 조건을 의미
-  //          });
-			
-  //      // filter binding
-  //      var oTable = this.byId("valueHelpList");
-		// var oBinding = oTable.getBinding("items");
-  //      oBinding.filter(oFilter);
-      
-  //  },
-    
     // 조회 button
      onSelect : function(){
     		
 			var dealNumber = this.byId("dealNumber").getValue();
 			var oFilter = new Filter([new Filter("DealNumber", FilterOperator.EQ,dealNumber)],false);
-			var oModelDetail = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZPJ_BDTRAN_TEST_SRV/");
-			
-			// function dateFormat(oDate){
-				
-			// var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-   //                 // pattern: "dd/MM/yyyy"
-   //                 pattern: "yyyy.MM.dd."
-   //             });
-   //             var pDate = new Date(oDate);
-   //             var sFormattedDate = oDateFormat.format(pDate);
-			
-			// return sFormattedDate;
-			// }
+			// var oModelDetail = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZPJ_BDTRAN_TEST_SRV/");
 			
 			var that = this;
+<<<<<<< Upstream, based on 5d5c8becec4d1b09a4327620202c869a9fd93f37
 	
 	
 	
 		
 	oModelDetail.read("/Z_BDTRANSet", {
+=======
+
+		// oModelDetail.read("/Z_BDTRANSet", {
+			oMainModel.read("/Z_BDTRANSet", {
+>>>>>>> 4a91641 20240719 commit -----jh
 			filters: [oFilter],
-			// success: function(oRetrievedResult) { 
 			success:function(oData, response){
 		// 		// // 1000000016439
 				var data = oData.results;
@@ -224,6 +165,7 @@ sap.ui.define([
 		});
 		},
 		
+<<<<<<< Upstream, based on 5d5c8becec4d1b09a4327620202c869a9fd93f37
 // //////////////////////////////////////////////////////////////////종목ID TEXT - S
 // 	setSecurityText: function(){
 // 			var oModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZPJ_BDTRAN_TEST_SRV/");
@@ -249,17 +191,83 @@ sap.ui.define([
 // 		},
 // //////////////////////////////////////////////////////////////////종목ID TEXT - E
 
+=======
+>>>>>>> 4a91641 20240719 commit -----jh
 	dateFormat: function(oDate){
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
-                    // pattern: "dd/MM/yyyy"
-            pattern: "yyyy.MM.dd."
-            });
+            	pattern: "yyyy.MM.dd."
+        	});
             
-            var pDate = new Date(oDate);
-            var sFormattedDate = oDateFormat.format(pDate);
+        	var pDate = new Date(oDate);
+        	var sFormattedDate = oDateFormat.format(pDate);
 			
 			return sFormattedDate;
-		},
+	},
+
+// 날짜를 OData 표준 형식으로 변환	
+	oDataDtFormat: function(oValue){
+		
+		var oDatePicker = this.getView().byId(oValue);
+		var oDate = oDatePicker.getDateValue(); // Date 객체 반환
+		
+		var sFormatDate = null;
+		
+		if (oDate) {
+    		var oTimezoneDate = new Date(oDate.getTime() - (oDate.getTimezoneOffset() * 60000)); // 타임존 보정
+    		sFormatDate = oTimezoneDate.toISOString().split('.')[0]; // 'yyyy-MM-ddTHH:mm:ss' 형식
+		}
+		return sFormatDate;
+	},
+	
+// 계산 
+	onCal: function( ){
+		
+			var oEntry = {
+				CompanyCode: this.getView().byId("companyCode").getValue(),
+				Zdatasrc: this.getView().byId("zdataSrc").getValue(),
+				SecurityId: this.getView().byId("securityId").getValue(),
+				Sfhaart: this.getView().byId("sfhaart").getValue(),
+				ProductType: this.getView().byId("productType").getValue(),
+				PaymentDate: this.oDataDtFormat("payMentDate"),
+				TradingDate: this.oDataDtFormat("tradingDate"),
+				SecurityAccount: this.getView().byId("securityAccount").getValue(),
+				Rrate: this.getView().byId("rrate").getValue(),
+				NominalAmt: this.getView().byId("nominalAmt").getValue(),
+				NominalCurr: "KRW"               
+			};
+			
+			var realTrade = this.getView().byId("realTrade").getSelected();
+			if (realTrade){
+				oEntry.PositionDate = this.oDataDtFormat("tradingDate");
+			}
+			else{
+				oEntry.PositionDate = this.oDataDtFormat("payMentDate");
+			}
+			
+			// 계산구분
+			var calType = this.getView().byId("calType").getSelectedButton().getText(); 
+			if (calType === "단가"){
+				oEntry.Xzprice11 = "X";
+			}
+			else{
+				oEntry.Xzprice22 = "X";
+			}
+			
+			console.log(oEntry);
+			
+			
+			oMainModel.create("/ZCalcDataSet", oEntry,{
+				
+				success: function(oData, response){
+					alert("성공");
+				},
+				error: function(oError){
+					alert("실패");
+				},
+				async: false
+			});
+			
+	},
 
 		
 		// SEARCH HELP
