@@ -5,9 +5,11 @@
 
 			<Panel headerText="거래개요">
 				<content>
-			
+
+					<HBox>
 						<Button text="조회" width="100px" press="onSelect"/>
-				
+						<Button text="새로고침"  icon="sap-icon://refresh" press="onRefresh"/>
+					</HBox>
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="leftVBoxStyle">
 							<Label text="회사코드" labelFor="companyCode"/>
@@ -159,7 +161,7 @@
 							<Label text="거래번호" labelFor="dealNumber"/>
 							<Input id="dealNumber" submit="onSelect" showValueHelp="true" valueHelpRequest="onRfhaHelp"/>
 							
-							<Dialog id="HRfha" title="거래번호">
+							<Dialog id="HRfha" title="거래번호" afterClose="onDialogAfterClose">
     					    <SearchField id="rfhaSearchField" search="onRfhaSearch"/>
     					    
     					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="dealNumberTable" items="{/HRfhaSet}">

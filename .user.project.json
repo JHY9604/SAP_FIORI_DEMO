@@ -16,11 +16,15 @@
         "runnerId": "webapprunner",
         "id": 7300815,
         "displayName": "Run index.html",
+<<<<<<< Upstream, based on c3f3bb62463174ee3ad674a64f4fbf0183ed62e3
 <<<<<<< Upstream, based on 5d5c8becec4d1b09a4327620202c869a9fd93f37
         "lastRunTimeStamp": 1721288876906
 =======
         "lastRunTimeStamp": 1721291637563
 >>>>>>> 4a91641 20240719 commit -----jh
+=======
+        "lastRunTimeStamp": 1721289194559
+>>>>>>> 33bf89d 20240718  1, 거래번호 서치헬프 조회 기능 추가 2. 새로고침 기능 추가 
       }
     },
     {
@@ -38,7 +42,7 @@
         "runnerId": "fiorirunner",
         "id": 2194816,
         "displayName": "Run Component.js",
-        "lastRunTimeStamp": 1720656686055
+        "lastRunTimeStamp": 1721279495543
       }
     }
   ]

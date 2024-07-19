@@ -3,7 +3,7 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function(Controller,JSONModel,Filter, FilterOperator) {
+], function(Controller, JSONModel, Filter, FilterOperator) {
 	"use strict";
 	
 	var oMainModel;
@@ -15,10 +15,11 @@ sap.ui.define([
     	var sUrl = "/sap/opu/odata/sap/ZPJ_BDTRAN_TEST_SRV/";
     	oMainModel = new sap.ui.model.odata.ODataModel(sUrl, true);
     	this.getView().setModel(oMainModel);
+
 		},
-		
-	// 종목조회
-		onReadBdClass: function () {
+
+		// 종목조회
+		onReadBdClass: function() {
 			// 4000000001928
             var securityId = this.byId("securityId").getValue();
             if (securityId == ""){
@@ -29,7 +30,7 @@ sap.ui.define([
 				var oModelDetail = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZPJ_BOND_TEST_SRV/");
 				var sPath = "/Z_BDCLASSSet(SecurityId='" + securityId + "')";
 				var that = this;
-				
+
 				oModelDetail.read(sPath, {
 
 				success: function(oData,oResponse){
@@ -52,21 +53,20 @@ sap.ui.define([
 					
 				},
 
-				error: function(oError){
-					var lvErrTxt = oError.message;
-					alert(lvErrTxt);
-				}
+					error: function(oError) {
+						var lvErrTxt = oError.message;
+						alert(lvErrTxt);
+					}
 
-				});   
-            	
-            }
-            
-            
+				});
+
+			}
+
 		},
 		
     // 조회 button
      onSelect : function(){
-    		
+
 			var dealNumber = this.byId("dealNumber").getValue();
 			var oFilter = new Filter([new Filter("DealNumber", FilterOperator.EQ,dealNumber)],false);
 			// var oModelDetail = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZPJ_BDTRAN_TEST_SRV/");
@@ -182,14 +182,19 @@ sap.ui.define([
 // 		},
 // //////////////////////////////////////////////////////////////////종목ID TEXT - E
 
-	dateFormat: function(oDate){
+
+		onRefresh: function() {
+			location.reload();
+		},
+
+		dateFormat: function(oDate) {
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
             	pattern: "yyyy.MM.dd."
         	});
             
         	var pDate = new Date(oDate);
         	var sFormattedDate = oDateFormat.format(pDate);
-			
+
 			return sFormattedDate;
 	},
 
@@ -258,249 +263,249 @@ sap.ui.define([
 			
 	},
 
-		
 		// SEARCH HELP
-// Dialog open
-	onDialogOpen: function(oId){
-		var oView = this.getView();
-    	var oDialog = oView.byId(oId);
-    	
-    	oDialog.open();
-	},
-// Dialog cancel	
-	onDialogClose: function(oId){
-		this.getView().byId(oId).close();
-	},	
-	
-// Dialog ok
-	onDialogOk: function(oListId){
-		var oSelectedItem = this.getView().byId(oListId).getSelectedItem();
-    	var oContext = oSelectedItem.getBindingContext();
-    	var oSelectedData = oContext.getObject();
-    	
-    	return oSelectedData;
-	},
-	
-//////////////////////////////////////////////////////////////////회사코드 Value Help - S
-    onCocdHelp: function(oEvent){
-    	this.onDialogOpen("HCompanyCode");
-    },
-    
-    onCocdOk: function(oEvent){
-     var SelectedData = this.onDialogOk("CoCdTable");
-     var oData = SelectedData.Bukrs;
-     
-     if (oData) {
-        this.getView().byId("companyCode").setValue(oData);
-      } 
-      this.onDialogClose("HCompanyCode");
-    },
-    
-    onCocdCancel: function (oEvent) {
-    	this.onDialogClose("HCompanyCode");
-    },
-//////////////////////////////////////////////////////////////////회사코드 Value Help - E  
+		// Dialog open
+		onDialogOpen: function(oId) {
+			var oView = this.getView();
+			var oDialog = oView.byId(oId);
 
-//////////////////////////////////////////////////////////////////거래번호 Value Help - S
-	onRfhaHelp: function(oEvent){
-		this.onDialogOpen("HRfha");
-	},
-	
-	onRfhaOk: function(oEvent){
-     var SelectedData = this.onDialogOk("dealNumberTable");
-     var oData = SelectedData.Rfha;
-     
-     if (oData) {
-        this.getView().byId("dealNumber").setValue(oData);
-      } 
-      this.onDialogClose("HRfha");
-    },
-    
-    onRfhaCancel: function (oEvent) {
-    	this.onDialogClose("HRfha");
-    },
-    
-    onRfhaSearch: function (oEvent) {
-	// build filter array
-      var aFilter = [];
-      var sQuery = oEvent.getParameter("query");
-      if (sQuery) {
-         aFilter.push(new Filter("Rfha", FilterOperator.Contains, sQuery));
-         aFilter.push(new Filter("SecurityIdT", FilterOperator.Contains, sQuery));
-      } else {
-      	 aFilter.push(new Filter("Rfha", FilterOperator.Contains, sQuery));
-      }
-         
-      var oFilter = new Filter({
-               filters: aFilter,
-               and: false // 'false'는 OR 조건을 의미
-            });
-         
-        // filter binding
-      var oTable = this.byId("dealNumberTable");
-      var oBinding = oTable.getBinding("items");
-        oBinding.filter(oFilter);
-    },
-//////////////////////////////////////////////////////////////////거래번호 Value Help - E
-	
-//////////////////////////////////////////////////////////////////종목ID Value Help - S   
-   
-	onSecurityHelp: function(oEvent){
-      this.onDialogOpen("HSecurity");
-	},   
-	
-	onSecurityOk: function(oEvent){
-		var SelectedData = this.onDialogOk("securityTable");
-		var oData = SelectedData.Ranl;
-    	
-    	if (oData) {
-        	this.getView().byId("securityId").setValue(oData);
-    	}
-    	
-    	this.onDialogClose("HSecurity");
-    	
-	},
-	
-	onSecurityCancel: function(oEvent){
-		this.onDialogClose("HSecurity");
-	},
-	
-	onSecuritySearch: function(oEvent){
-		var aFilter = [];
-		var sQuery = oEvent.getParameter("query");
+			oDialog.open();
+		},
+		// Dialog cancel	
+		onDialogClose: function(oId) {
+			this.getView().byId(oId).close();
+		},
 
-		if (sQuery) {
-			aFilter.push(new Filter("Ranl", FilterOperator.Contains, sQuery));
-			aFilter.push(new Filter("Xallb", FilterOperator.Contains, sQuery));
+		// Dialog ok
+		onDialogOk: function(oListId) {
+			var oSelectedItem = this.getView().byId(oListId).getSelectedItem();
+			var oContext = oSelectedItem.getBindingContext();
+			var oSelectedData = oContext.getObject();
 
-		} else {
-      	 aFilter.push(new Filter("Ranl", FilterOperator.Contains, sQuery));
-      }
+			return oSelectedData;
+		},
 
-	      var oFilter = new Filter({
-               filters: aFilter,
-               and: false // 'false'는 OR 조건을 의미
-            });
+		//////////////////////////////////////////////////////////////////회사코드 Value Help - S
+		onCocdHelp: function(oEvent) {
+			this.onDialogOpen("HCompanyCode");
+		},
 
-		// filter binding
-		var oList = this.getView().byId("securityTable");
-		var oBinding = oList.getBinding("items");
-		oBinding.filter(oFilter);		
+		onCocdOk: function(oEvent) {
+			var SelectedData = this.onDialogOk("CoCdTable");
+			var oData = SelectedData.Bukrs;
 
+			if (oData) {
+				this.getView().byId("companyCode").setValue(oData);
+			}
+			this.onDialogClose("HCompanyCode");
+		},
 
+		onCocdCancel: function(oEvent) {
+			this.onDialogClose("HCompanyCode");
+		},
+		//////////////////////////////////////////////////////////////////회사코드 Value Help - E  
 
-	},
-//////////////////////////////////////////////////////////////////종목ID Value Help - E	
-    
-//////////////////////////////////////////////////////////////////상품유형 Value Help - S		
-	onPTypeHelp: function (oEvent) {
-      this.onDialogOpen("HPtype");
-    },
-    
-    onPTypeOk: function (oEvent) {
-     var SelectedData = this.onDialogOk("pTypTable");
-		var oData = SelectedData.Gsart;
-    	
-    	if (oData) {
-        	this.getView().byId("productType").setValue(oData);
-    	}
-    	
-    	this.onDialogClose("HPtype");
-    },
+		//////////////////////////////////////////////////////////////////거래번호 Value Help - S
+		onRfhaHelp: function(oEvent) {
+			this.onDialogOpen("HRfha");
+		},
 
-    onPTypeCancel: function (oEvent) {
-    	this.onDialogClose("HPtype");
-    },
-    
-    onPTypSearch: function (oEvent) {
-	// build filter array
-      var aFilter = [];
-      var sQuery = oEvent.getParameter("query");
-      if (sQuery) {
-         aFilter.push(new Filter("Gsart", FilterOperator.Contains, sQuery));
-         aFilter.push(new Filter("Ltx", FilterOperator.Contains, sQuery));
-      } else {
-      	 aFilter.push(new Filter("Gsart", FilterOperator.Contains, sQuery));
-      }
-         
-      var oFilter = new Filter({
-               filters: aFilter,
-               and: false // 'false'는 OR 조건을 의미
-            });
-         
-        // filter binding
-      var oTable = this.byId("pTypTable");
-      var oBinding = oTable.getBinding("items");
-        oBinding.filter(oFilter);
-    },
-//////////////////////////////////////////////////////////////////상품유형 Value Help - E  
- 
- 
-//////////////////////////////////////////////////////////////////거래유형 Value Help - S
-	onSfhaartHelp: function (oEvent) {
-      this.onDialogOpen("SfhaartDialog");
-    },
-    
-    onSfhhartOk: function (oEvent) {
-     var SelectedData = this.onDialogOk("sfhaartTable");
-		var oData = SelectedData.TTyp;
-    	
-    	if (oData) {
-        	this.getView().byId("sfhaart").setValue(oData);
-    	}
-    	
-    	this.onDialogClose("SfhaartDialog");
-    },
+		onRfhaOk: function(oEvent) {
+			var SelectedData = this.onDialogOk("dealNumberTable");
+			var oData = SelectedData.Rfha;
 
-    onSfhhartCancel: function (oEvent) {
-    	this.onDialogClose("SfhaartDialog");
-    },
-    
-    onSfhaartSearch: function (oEvent) {
-	// build filter array
-      var aFilter = [];
-      var sQuery = oEvent.getParameter("query");
-      if (sQuery) {
-         aFilter.push(new Filter("Sgsart", FilterOperator.Contains, sQuery));
-         aFilter.push(new Filter("Sfhaart", FilterOperator.Contains, sQuery));
-      } else {
-      	 aFilter.push(new Filter("Sfhaart", FilterOperator.Contains, sQuery));
-      }
-         
-      var oFilter = new Filter({
-               filters: aFilter,
-               and: false // 'false'는 OR 조건을 의미
-            });
-         
-        // filter binding
-      var oTable = this.byId("sfhaartTable");
-      var oBinding = oTable.getBinding("items");
-        oBinding.filter(oFilter);
-    },    
-//////////////////////////////////////////////////////////////////거래유형 Value Help - E     
- 
-//////////////////////////////////////////////////////////////////당사계좌1 Value Help - S    
-    onHbkidHelp: function (oEvent){
-      this.onDialogOpen("HHbkid");
-    },
-    
-     onHbkidOk: function (oEvent) {
-    	var SelectedData = this.onDialogOk("hbkidTable");
-		var oData = SelectedData.Hbkid;
-    	
-    	if (oData) {
-        	this.getView().byId("hbkid").setValue(oData);
-    	}
-    	
-    	this.onDialogClose("HHbkid");
-    },
-    
-    onHbkidCancel: function (oEvent) {
-      this.onDialogClose("HHbkid");
-    },
-    
-    onHbkidSearch: function (oEvent) {
-	// build filter array
+			if (oData) {
+				this.getView().byId("dealNumber").setValue(oData);
+			}
+			this.onDialogClose("HRfha");
+		},
+
+		onRfhaCancel: function(oEvent) {
+			this.onDialogClose("HRfha");
+		},
+
+		onRfhaSearch: function(oEvent) {
+			// build filter array
+			var aFilter = [];
+			var sQuery = oEvent.getParameter("query");
+			if (sQuery) {
+				aFilter.push(new Filter("Rfha", FilterOperator.Contains, sQuery));
+				aFilter.push(new Filter("SecurityIdT", FilterOperator.Contains, sQuery));
+			} else {
+				aFilter.push(new Filter("Rfha", FilterOperator.Contains, sQuery));
+			}
+
+			var oFilter = new Filter({
+				filters: aFilter,
+				and: false // 'false'는 OR 조건을 의미
+			});
+
+			// filter binding
+			var oTable = this.byId("dealNumberTable");
+			var oBinding = oTable.getBinding("items");
+			oBinding.filter(oFilter);
+		},
+		onDialogAfterClose: function(oEvent) {
+			alert("close");
+			this.sQuery.setValue(""); 
+		},
+		//////////////////////////////////////////////////////////////////거래번호 Value Help - E
+
+		//////////////////////////////////////////////////////////////////종목ID Value Help - S   
+
+		onSecurityHelp: function(oEvent) {
+			this.onDialogOpen("HSecurity");
+		},
+
+		onSecurityOk: function(oEvent) {
+			var SelectedData = this.onDialogOk("securityTable");
+			var oData = SelectedData.Ranl;
+
+			if (oData) {
+				this.getView().byId("securityId").setValue(oData);
+			}
+
+			this.onDialogClose("HSecurity");
+
+		},
+
+		onSecurityCancel: function(oEvent) {
+			this.onDialogClose("HSecurity");
+		},
+
+		onSecuritySearch: function(oEvent) {
+			var aFilter = [];
+			var sQuery = oEvent.getParameter("query");
+
+			if (sQuery) {
+				aFilter.push(new Filter("Ranl", FilterOperator.Contains, sQuery));
+				aFilter.push(new Filter("Xallb", FilterOperator.Contains, sQuery));
+
+			} else {
+				aFilter.push(new Filter("Ranl", FilterOperator.Contains, sQuery));
+			}
+
+			var oFilter = new Filter({
+				filters: aFilter,
+				and: false // 'false'는 OR 조건을 의미
+			});
+
+			// filter binding
+			var oList = this.getView().byId("securityTable");
+			var oBinding = oList.getBinding("items");
+			oBinding.filter(oFilter);
+
+		},
+		//////////////////////////////////////////////////////////////////종목ID Value Help - E	
+
+		//////////////////////////////////////////////////////////////////상품유형 Value Help - S		
+		onPTypeHelp: function(oEvent) {
+			this.onDialogOpen("HPtype");
+		},
+
+		onPTypeOk: function(oEvent) {
+			var SelectedData = this.onDialogOk("pTypTable");
+			var oData = SelectedData.Gsart;
+
+			if (oData) {
+				this.getView().byId("productType").setValue(oData);
+			}
+
+			this.onDialogClose("HPtype");
+		},
+
+		onPTypeCancel: function(oEvent) {
+			this.onDialogClose("HPtype");
+		},
+
+		onPTypSearch: function(oEvent) {
+			// build filter array
+			var aFilter = [];
+			var sQuery = oEvent.getParameter("query");
+			if (sQuery) {
+				aFilter.push(new Filter("Gsart", FilterOperator.Contains, sQuery));
+				aFilter.push(new Filter("Ltx", FilterOperator.Contains, sQuery));
+			} else {
+				aFilter.push(new Filter("Gsart", FilterOperator.Contains, sQuery));
+			}
+
+			var oFilter = new Filter({
+				filters: aFilter,
+				and: false // 'false'는 OR 조건을 의미
+			});
+
+			// filter binding
+			var oTable = this.byId("pTypTable");
+			var oBinding = oTable.getBinding("items");
+			oBinding.filter(oFilter);
+		},
+		//////////////////////////////////////////////////////////////////상품유형 Value Help - E  
+
+		//////////////////////////////////////////////////////////////////거래유형 Value Help - S
+		onSfhaartHelp: function(oEvent) {
+			this.onDialogOpen("SfhaartDialog");
+		},
+
+		onSfhhartOk: function(oEvent) {
+			var SelectedData = this.onDialogOk("sfhaartTable");
+			var oData = SelectedData.TTyp;
+
+			if (oData) {
+				this.getView().byId("sfhaart").setValue(oData);
+			}
+
+			this.onDialogClose("SfhaartDialog");
+		},
+
+		onSfhhartCancel: function(oEvent) {
+			this.onDialogClose("SfhaartDialog");
+		},
+
+		onSfhaartSearch: function(oEvent) {
+			// build filter array
+			var aFilter = [];
+			var sQuery = oEvent.getParameter("query");
+			if (sQuery) {
+				aFilter.push(new Filter("Sgsart", FilterOperator.Contains, sQuery));
+				aFilter.push(new Filter("Sfhaart", FilterOperator.Contains, sQuery));
+			} else {
+				aFilter.push(new Filter("Sfhaart", FilterOperator.Contains, sQuery));
+			}
+
+			var oFilter = new Filter({
+				filters: aFilter,
+				and: false // 'false'는 OR 조건을 의미
+			});
+
+			// filter binding
+			var oTable = this.byId("sfhaartTable");
+			var oBinding = oTable.getBinding("items");
+			oBinding.filter(oFilter);
+		},
+		//////////////////////////////////////////////////////////////////거래유형 Value Help - E     
+
+		//////////////////////////////////////////////////////////////////당사계좌1 Value Help - S    
+		onHbkidHelp: function(oEvent) {
+			this.onDialogOpen("HHbkid");
+		},
+
+		onHbkidOk: function(oEvent) {
+			var SelectedData = this.onDialogOk("hbkidTable");
+			var oData = SelectedData.Hbkid;
+
+			if (oData) {
+				this.getView().byId("hbkid").setValue(oData);
+			}
+
+			this.onDialogClose("HHbkid");
+		},
+
+		onHbkidCancel: function(oEvent) {
+			this.onDialogClose("HHbkid");
+		},
+
+		onHbkidSearch: function(oEvent) {
+			// build filter array
 
 			var aFilter = [];
 			var sQuery = oEvent.getParameter("query");
@@ -514,122 +519,122 @@ sap.ui.define([
 			var oBinding = oList.getBinding("items");
 			oBinding.filter(aFilter);
 
-    },
-//////////////////////////////////////////////////////////////////당사계좌1 Value Help - E    
-    
- //////////////////////////////////////////////////////////////////당사계좌2 Value Help - S
-    onHktidHelp: function (oEvent){
-      this.onDialogOpen("HHktid");
-    },
-    
-     onHktidOk: function (oEvent) {
-    	var SelectedData = this.onDialogOk("hktidTable");
-		var oData = SelectedData.Hktid;
-    	
-    	if (oData) {
-        	this.getView().byId("hktid").setValue(oData);
-    	}
-    	
-    	this.onDialogClose("HHktid");
-    },
-    
-    onHktidCancel: function (oEvent) {
-      this.onDialogClose("HHktid");
-    },
-    
-    onHktidSearch: function (oEvent) {
-	// build filter array
-            var sQuery = oEvent.getSource().getValue();  
-            var oFilter = new sap.ui.model.Filter({
-                filters: [
-                    new sap.ui.model.Filter("Hktid", sap.ui.model.FilterOperator.Contains, sQuery)
-                ],
-                and: false
-            });
+		},
+		//////////////////////////////////////////////////////////////////당사계좌1 Value Help - E    
 
-            var oBinding = sap.ui.getCore().byId("hktidTable").getBinding("items");     
-            oBinding.filter(oFilter, sap.ui.model.FilterType.Application);   
-    },
-//////////////////////////////////////////////////////////////////당사계좌2 Value Help - E    
+		//////////////////////////////////////////////////////////////////당사계좌2 Value Help - S
+		onHktidHelp: function(oEvent) {
+			this.onDialogOpen("HHktid");
+		},
 
-//////////////////////////////////////////////////////////////////계정구분 Value Help - S
-	onPortDialog: function(oEvent){
-		this.onDialogOpen("portDialog");
-	},
-	
-	onPortOk: function(oEvent){
-		var SelectedData = this.onDialogOk("portTable");
-		var oData = SelectedData.Rportb;
-		
-		if(oData){
-			this.getView().byId("portfolio").setValue(oData);
+		onHktidOk: function(oEvent) {
+			var SelectedData = this.onDialogOk("hktidTable");
+			var oData = SelectedData.Hktid;
+
+			if (oData) {
+				this.getView().byId("hktid").setValue(oData);
+			}
+
+			this.onDialogClose("HHktid");
+		},
+
+		onHktidCancel: function(oEvent) {
+			this.onDialogClose("HHktid");
+		},
+
+		onHktidSearch: function(oEvent) {
+			// build filter array
+			var sQuery = oEvent.getSource().getValue();
+			var oFilter = new sap.ui.model.Filter({
+				filters: [
+					new sap.ui.model.Filter("Hktid", sap.ui.model.FilterOperator.Contains, sQuery)
+				],
+				and: false
+			});
+
+			var oBinding = sap.ui.getCore().byId("hktidTable").getBinding("items");
+			oBinding.filter(oFilter, sap.ui.model.FilterType.Application);
+		},
+		//////////////////////////////////////////////////////////////////당사계좌2 Value Help - E    
+
+		//////////////////////////////////////////////////////////////////계정구분 Value Help - S
+		onPortDialog: function(oEvent) {
+			this.onDialogOpen("portDialog");
+		},
+
+		onPortOk: function(oEvent) {
+			var SelectedData = this.onDialogOk("portTable");
+			var oData = SelectedData.Rportb;
+
+			if (oData) {
+				this.getView().byId("portfolio").setValue(oData);
+			}
+			this.onDialogClose("portDialog");
+		},
+
+		onPortCancel: function(oEvent) {
+			this.onDialogClose("portDialog");
+		},
+		//////////////////////////////////////////////////////////////////계정구분 Value Help - E
+
+		//////////////////////////////////////////////////////////////////운용역 Value Help - S
+		onManagerHelp: function(oEvent) {
+			this.onDialogOpen("managerDialog");
+		},
+
+		onManagerOk: function(oEvent) {
+			var SelectedData = this.onDialogOk("managerTable");
+			var oData = SelectedData.Manager;
+
+			if (oData) {
+				this.getView().byId("manager").setValue(oData);
+			}
+			this.onDialogClose("managerDialog");
+		},
+
+		onManagerCancle: function(oEvent) {
+			this.onDialogClose("managerDialog");
+		},
+		//////////////////////////////////////////////////////////////////운용역 Value Help - E
+
+		//////////////////////////////////////////////////////////////////거래처 Value Help - S
+		onKontrhHelp: function(oEvent) {
+			this.onDialogOpen("kontrhDialog");
+		},
+		onKontrhOk: function(oEvent) {
+			var SelectedData = this.onDialogOk("kontrhTable");
+			var oData = SelectedData.Partner;
+
+			if (oData) {
+				this.getView().byId("kontrh").setValue(oData);
+			}
+			this.onDialogClose("kontrhDialog");
+		},
+		onKontrhCancle: function(oEvent) {
+			this.onDialogClose("kontrhDialog");
+		},
+
+		onKontrhSearch: function(oEvent) {
+			var aFilter = [];
+			var sQuery = oEvent.getParameter("query");
+			if (sQuery) {
+				aFilter.push(new Filter("Partner", FilterOperator.Contains, sQuery));
+				aFilter.push(new Filter("NameOrg1", FilterOperator.Contains, sQuery));
+			} else {
+				aFilter.push(new Filter("Partner", FilterOperator.Contains, sQuery));
+			}
+
+			var oFilter = new Filter({
+				filters: aFilter,
+				and: false // 'false'는 OR 조건을 의미
+			});
+
+			// filter binding
+			var oTable = this.byId("kontrhTable");
+			var oBinding = oTable.getBinding("items");
+			oBinding.filter(oFilter);
 		}
-		this.onDialogClose("portDialog");
-	},
-	
-	onPortCancel: function(oEvent){
-		this.onDialogClose("portDialog");
-	},
-//////////////////////////////////////////////////////////////////계정구분 Value Help - E
 
-//////////////////////////////////////////////////////////////////운용역 Value Help - S
-	onManagerHelp: function(oEvent){
-		this.onDialogOpen("managerDialog");
-	},
-	
-	onManagerOk: function(oEvent){
-		var SelectedData = this.onDialogOk("managerTable");
-		var oData = SelectedData.Manager;
-		
-		if(oData){
-			this.getView().byId("manager").setValue(oData);
-		}
-		this.onDialogClose("managerDialog");
-	},
-	
-	onManagerCancle: function(oEvent){
-		this.onDialogClose("managerDialog");
-	},
-//////////////////////////////////////////////////////////////////운용역 Value Help - E
-
-//////////////////////////////////////////////////////////////////거래처 Value Help - S
-	onKontrhHelp: function(oEvent){
-		this.onDialogOpen("kontrhDialog");
-	},
-	onKontrhOk: function(oEvent){
-		var SelectedData = this.onDialogOk("kontrhTable");
-		var oData = SelectedData.Partner;
-		
-		if(oData){
-			this.getView().byId("kontrh").setValue(oData);
-		}
-		this.onDialogClose("kontrhDialog");
-	},
-	onKontrhCancle: function(oEvent){
-		this.onDialogClose("kontrhDialog");
-	},
-	
-	onKontrhSearch: function(oEvent){
-    	var aFilter = [];
-    	var sQuery = oEvent.getParameter("query");
-    	if (sQuery) {
-    	   aFilter.push(new Filter("Partner", FilterOperator.Contains, sQuery));
-    	   aFilter.push(new Filter("NameOrg1", FilterOperator.Contains, sQuery));
-    	} else {
-    		 aFilter.push(new Filter("Partner", FilterOperator.Contains, sQuery));
-    	}
-    	   
-    	var oFilter = new Filter({
-    	         filters: aFilter,
-    	         and: false // 'false'는 OR 조건을 의미
-    	      });
-    	   
-    	  // filter binding
-    	var oTable = this.byId("kontrhTable");
-    	var oBinding = oTable.getBinding("items");
-    	  oBinding.filter(oFilter);	
-	}
-
-//////////////////////////////////////////////////////////////////거래처 Value Help - E
+		//////////////////////////////////////////////////////////////////거래처 Value Help - E
 	});
 });
