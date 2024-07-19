@@ -17,7 +17,7 @@ sap.ui.define([
     	this.getView().setModel(oMainModel);
 
 		},
-
+ 
 		// 종목조회
 		onReadBdClass: function() {
 			// 4000000001928
