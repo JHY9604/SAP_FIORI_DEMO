@@ -5,14 +5,17 @@
 
 			<Panel headerText="거래개요">
 				<content>
-					<VBox>
+			
 						<Button text="조회" width="100px" press="onSelect"/>
-					</VBox>
+				
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="leftVBoxStyle">
 							<Label text="회사코드" labelFor="companyCode"/>
+							<HBox>
 							<Input id="companyCode" width="100%" showValueHelp="true" valueHelpRequest="onCocdHelp"/>
-							
+							<Text text="회사코드명" id="cocdText" class="cocdCode"/>
+							</HBox>
+							</VBox>		
 <!-- ********************************Cocd Value Help DIALOG Start***************************** -->
 							<Dialog id="HCompanyCode" title="회사코드">
     					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="CoCdTable" items="{/HT001Set}">
@@ -43,16 +46,7 @@
         						<Button text="Cancel" press="onCocdCancel"/>
     						</endButton>
     					</Dialog>									
-									
 <!-- ********************************Cocd Value Help DIALOG End***************************** -->								
-						</VBox>		
-						
-						<VBox class="leftVBoxStyle">
-							<items>
-					    		<Text text="No text specified" id="__text11"/>
-							</items>
-						</VBox>
-
                 		<VBox class="rightVBoxStyle">
                     		<Label text="BDC 모드" labelFor="bdcMode"/>
 							  <ComboBox id="bdcMode" width="200px" placeholder="Select an item">
@@ -62,17 +56,16 @@
 							       <core:Item key="3" text="백그라운드처리:디버깅기능"/>
 							  </ComboBox>
 						</VBox>
-					<!--<items>-->
-					
-					<!--</items>-->
-					
 					</HBox>
 					
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="leftVBoxStyle">
 							<Label text="종목ID" labelFor="securityId"/>
+							<HBox>
 							<Input id="securityId" submit="onReadBdClass" showValueHelp="true" valueHelpRequest="onSecurityHelp"/>
-							
+							<Text text="" id="securityText" class="securityId"/>
+							</HBox>
+						</VBox>							
 <!-- ********************************종목ID Value Help DIALOG Start***************************** -->		
 							<Dialog id="HSecurity" title="종목ID">
 							<SearchField id="securitySearch" search="onSecuritySearch"/>
@@ -104,10 +97,7 @@
         						<Button text="Cancel" press="onSecurityCancel"/>
     						</endButton>
     					</Dialog>	
-
 <!-- ********************************종목ID Value Help DIALOG End***************************** -->								
-						</VBox>
-						
 						<VBox class="rightVBoxStyle">
 							<Label text="상태" labelFor="status"/>
 							  <ComboBox id="status" width="200px" placeholder="Select an item" items="{ path: '/ZDSTATUSSet' }">
@@ -119,8 +109,11 @@
 				<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox>
 							<Label text="상품유형" labelFor="productType"/>
+							<HBox>
 							<Input id="productType" showValueHelp="true" valueHelpRequest="onPTypeHelp"/>
-							
+							<Text text="" id="productText" class="productTextId"/>
+							</HBox>
+						</VBox>							
 <!-- ********************************상품유형 Value Help DIALOG Start***************************** -->							
 							<Dialog id="HPtype" title="상품유형">
     					    <SearchField id="searchField" search="onPTypSearch"/>
@@ -162,11 +155,6 @@
     						</endButton>
     					</Dialog>
 <!-- ********************************상품유형 Value Help DIALOG End***************************** -->								
-							
-    					
-						</VBox>
-						
-						
 						<VBox>
 							<Label text="거래번호" labelFor="dealNumber"/>
 							<Input id="dealNumber" submit="onSelect" showValueHelp="true" valueHelpRequest="onRfhaHelp" />
@@ -252,9 +240,11 @@
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="leftVBoxStyle">
 							<Label text="거래유형" labelFor="sfhaart"/>
+							<HBox>
 							<Input id="sfhaart" showValueHelp="true" valueHelpRequest="onSfhaartHelp"/>
-						<!--</VBox>-->
-						
+							<Text text="" id="sfhaartText" class="sfhaartTextId"/>
+							</HBox>
+   						</VBox>							
 <!-- ********************************거래유형 Value Help DIALOG Start***************************** -->							
 							<Dialog id="SfhaartDialog" title="거래유형">
     					    <SearchField id="sfhaartSearch" search="onSfhaartSearch"/>
@@ -291,9 +281,7 @@
         						<Button text="Cancel" press="onSfhhartCancel"/>
     						</endButton>
     					</Dialog>
-    					</VBox>
 <!-- ********************************거래유형 Value Help DIALOG End***************************** -->
-						
 						<VBox class="rightBoxStyle">
 							<Label text="구,포지션ID" labelFor="expId"/>
 							<Input id="expId"/>
@@ -329,15 +317,14 @@
 								<Label text=""/>
 								<Label text=""/>
 								<Label text="액면" labelFor="nominalAmt"/>
+								
+								<HBox>
 								<Input id="nominalAmt"/>
+								<Button text="펀드배분" icon="sap-icon://dimension" class="fund" press="onFund"/>
+								</HBox>
 							</VBox>
 							
-							<VBox class="leftBoxStyle">
-								<Label text=""/>
-								<Label text=""/>
-								<Label text=""/>
-								<Button text="펀드배분" class="fund" press="onFund"/>
-							</VBox>
+
 							
 							<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 								<VBox class="Box">
@@ -353,44 +340,52 @@
 						<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 							<VBox class="leftBoxStyle">
 								<Label text="수익률" labelFor="rrate"/>
-								<Input id="rrate"/>
-								
-								<Label text="%" class="percent"/>
-
+								<HBox>
+									<Input id="rrate"/>
+									<Label text="%" class="percent"/>
+								</HBox>
 								<Label text="계산단가" labelFor="zprice1"/>
 								<Input id="zprice1"/>
 
 								<Label text="단가조정" labelFor="zprice4"/>
-								<Input id="zprice4"/>
+								<HBox>
+									<Input id="zprice4"/>
+									<Button text="계산" icon="sap-icon://simulate"  class="cal" press="onCal"/>
+								</HBox>
 							</VBox>
 						</HBox>
 						<HBox>
 							<VBox>
-								<Button text="계산" class="cal" press="onCal"/>
 								
+			
 								<Label text="적용단가" labelFor="zprice2"/>
-								<Input id="zprice2"/>
+								<HBox>
+									<Input id="zprice2"/>
+									<CheckBox text="10,000단가" selected="" class="per"/>								
+								</HBox>
 							</VBox>
-						<VBox>
-								<CheckBox text="10,000단가" selected="" class="per"/>
-							</VBox>
+						
+
 						</HBox>
 						
 					<HBox>
 						<VBox>
 							<Label text="시가"/>
-							<Input/>
+							<HBox>
+								<Input/>
+								<CheckBox text="계산제외" selected="" class="per"/>							
+							</HBox>								
 						</VBox> 
-						<VBox>
-								<CheckBox text="계산제외" selected="" class="per"/>
-							</VBox>						
+
 					</HBox>
 					
 						<HBox>
 							<VBox>
 								<Label text="매매금액" labelFor="tradeAmt"/>
-								<Input id="tradeAmt"/>
-								<Label text="KRW" class="KRW"/>
+								<HBox>
+									<Input id="tradeAmt"/>
+									<Label text="KRW" class="KRW"/>
+								</HBox>
 								<Label/>
 								<Label/>
 								<Label/>
@@ -426,7 +421,10 @@
 						<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 							<VBox class="rightBoxStyle">
 								<Label text="거래처" labelFor="kontrh"/>
-								<Input id="kontrh" showValueHelp="true" valueHelpRequest="onKontrhHelp"/>
+								<HBox>
+									<Input id="kontrh" showValueHelp="true" valueHelpRequest="onKontrhHelp"/>
+									<Text text="거래처명" id="kontrhText" class="kontrhTextId"/>
+								</HBox>
 							</VBox>
 						</HBox>
 						
@@ -534,11 +532,16 @@
 						<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 							<VBox class="rightBoxStyle">
 								<Label text="예탁처" labelFor="sglzb"/>
+								<HBox>
 								<Input id="sglzb"/>
+								<Text text="예탁처명[계좌]" id="sglzbText" class="sglzbTextId"/>
+								</HBox>
 								
 								<Label text="결제계좌" labelFor="accNo"/>
-								<Input id="accNo"/>
-								<Button text="결제계좌지정" class="account"/>
+								<HBox>
+									<Input id="accNo"/>
+									<Button text="결제계좌지정" icon="sap-icon://simple-payment" class="account"/>
+								</HBox>
 							</VBox>
 						</HBox>
 						
@@ -550,7 +553,10 @@
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="leftVBoxStyle">
 							<Label text="계정구분" labelFor="portfolio"/>
+							<HBox>
 							<Input id="portfolio" showValueHelp="true" valueHelpRequest="onPortDialog"/>
+							<Text text="계정명" id="portfolioText" class="portfolioTextId"/>
+							</HBox>
 						</VBox>
 					</HBox>
 					
@@ -588,14 +594,20 @@
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="rightBoxStyle">
 							<Label text="운용펀드" labelFor="accountGroup"/>
-							<Input id="accountGroup"/>
+							<HBox>
+								<Input id="accountGroup"/>
+								<Text text="펀드명" id="accountGroupText" class="accountGroupTextId"/>
+							</HBox>
 						</VBox>
 					</HBox>	
 					
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="rightBoxStyle">
 							<Label text="운용역" labelFor="manager"/>
-							<Input id="manager" showValueHelp="true" valueHelpRequest="onManagerHelp"/>
+							<HBox>
+								<Input id="manager" showValueHelp="true" valueHelpRequest="onManagerHelp"/>
+								<Text text="" id="managerText" class="managerTextId"/>
+							</HBox>
 						</VBox>
 					</HBox>
 					
@@ -736,10 +748,12 @@
 							<Input width="20%" id="itcd"/>
 							<!--<Label text="이표채" class="cuponBond"/>-->
 						</VBox>
-						<VBox class="leftBoxStyle">
+						<VBox>
 							<Label text="이자지급계산주기" labelFor="ittm"/>
-							<Input width="20%" id="ittm"/>
-							<Label text="개월" class="cuponBond"/>							
+							<HBox>
+								<Input width="20%" id="ittm"/>
+								<Label text="개월" class="cuponBond"/>							
+							</HBox>
 						</VBox>
 					</HBox>	
 					
@@ -759,8 +773,10 @@
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="rightBoxStyle">
 							<Label text="표면이자율" labelFor="cupr"/>
-							<Input width="90%" id="cupr"/>
-							<Label text="%" class="rate"/>
+							<HBox>
+								<Input width="90%" id="cupr"/>
+								<Label text="%" class="rate"/>
+							</HBox>
 						</VBox>
 						<VBox class="leftBoxStyle">
 							<Label text="FRN RATE1" labelFor="zfrate1"/>
@@ -771,8 +787,10 @@
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="rightBoxStyle">
 							<Label text="할인율" labelFor="ipyohal01"/>
-							<Input width="90%" id="ipyohal01"/>
-							<Label text="%" class="rate"/>
+							<HBox>
+								<Input width="90%" id="ipyohal01"/>
+								<Label text="%" class="rate"/>
+							</HBox>
 						</VBox>
 						<VBox class="leftBoxStyle">
 							<Label text="FRN RATE2" labelFor="zfrate2"/>

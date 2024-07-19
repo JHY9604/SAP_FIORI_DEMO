@@ -16,18 +16,92 @@
 	position: relative;
 	top:-15px;
 }
-
 .bottom{
 	position: relative;
 	bottom: -22px;
 }
-
 .KAmt{
 	position: relative;
 	left: -55px;
 }
-
 .Amt{
 	position: relative;
 	left: -55px;
+}
+.cocdCode{
+	position: relative;
+	left: 5px;
+	top: 13px;
+	font-size: 15px;
+}
+.securityId{
+	position: relative;
+	left: 5px;
+	top: 13px;
+	font-size: 15px;	
+}
+.productTextId{
+	position: relative;
+	left: 5px;
+	top: 13px;
+	font-size: 15px;
+}
+.sfhaartTextId{
+	position: relative;
+	left: 5px;
+	top: 13px;
+	font-size: 15px;	
+}
+.percent{
+	position: relative;
+	top: 13px;
+	left: 5px;
+	font-size: 18px;	
+}
+.KRW{
+	position: relative;
+	top: 13px;
+	left: 5px;
+	font-size: 15px;
+}
+.kontrhTextId{
+	position: relative;
+	top: 13px;
+	left: 5px;
+	font-size: 15px;
+}
+.sglzbTextId{
+	position: relative;
+	top: 13px;
+	left: 5px;
+	font-size: 15px;	
+}
+.portfolioTextId{
+	position: relative;
+	top: 13px;
+	left: 5px;
+	font-size: 15px;	
+}
+.accountGroupTextId{
+	position: relative;
+	top: 13px;
+	left: 5px;
+	font-size: 15px;	
+}
+.managerTextId{
+	position: relative;
+	top: 13px;
+	left: 5px;
+	font-size: 15px;	
+}
+.fund{
+	position: relative;
+	top: 0px;
+	left: -0px;
+}
+.rate{
+	position: relative;
+	top: 13px;
+	left: -13px;
+	font-size: 20px;
 }

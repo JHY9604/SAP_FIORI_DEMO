@@ -51,7 +51,6 @@ sap.ui.define([
 					that.byId("isin").setValue(data.Isin); //표준코드
 					that.byId("xrfmd").setValue(data.Xrfmd); //상환방법
 					
-					
 				},
 
 				error: function(oError){
@@ -137,15 +136,16 @@ sap.ui.define([
 			// }
 			
 			var that = this;
+	
+	
+	
 		
-		oModelDetail.read("/Z_BDTRANSet", {
+	oModelDetail.read("/Z_BDTRANSet", {
 			filters: [oFilter],
 			// success: function(oRetrievedResult) { 
 			success:function(oData, response){
 		// 		// // 1000000016439
 				var data = oData.results;
-				
-				console.log(data[0]);
 
 				that.getView().byId("companyCode").setValue(data[0].CompanyCode); // 회사 코드
 				that.getView().byId("securityId").setValue(data[0].SecurityId); // 종목ID
@@ -153,6 +153,7 @@ sap.ui.define([
 				that.getView().byId("sfhaart").setValue(data[0].Sfhaart); // 거래유형
 				that.getView().byId("status").setValue(data[0].Status); // 상태
 				that.getView().byId("zdataSrc").setValue(data[0].Zdatasrc); // 데이터구분
+				
 				
 				that.getView().byId("expId").setValue(data[0].ExpId); // 구,포지션ID
 				
@@ -201,7 +202,17 @@ sap.ui.define([
 				that.onReadBdClass( );
 				that.getView().byId("zfrate1").setValue(data[0].Zfrate1); //FRN RATE1
 				that.getView().byId("zfrate2").setValue(data[0].Zfrate2); //FRN RATE2
+		
+		
+				that.setSecurityText();
+				that.setProductTypeText(); 
+				that.setsfhaartText();
+				that.setkontrhText();
+				that.managerText();
 				alert('조회 성공');
+				
+				
+				
 			},
 			error: function(oError) {
 				var lvErrTxt = oError.message;
@@ -213,7 +224,32 @@ sap.ui.define([
 		});
 		},
 		
-		dateFormat: function(oDate){
+// //////////////////////////////////////////////////////////////////종목ID TEXT - S
+// 	setSecurityText: function(){
+// 			var oModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZPJ_BDTRAN_TEST_SRV/");
+// 			sap.ui.getCore().setModel(oModel);			
+			
+// 				var aFilters1 = [
+// 			    new sap.ui.model.Filter("Ranl", sap.ui.model.FilterOperator.EQ, this.getView().byId("securityId").getValue())
+// 			];
+			
+// 			var that = this; 
+			
+// 			oModel.read("/ZhcfmcmranlBdSet", {
+// 			    filters: aFilters1,
+// 			    success: function(oData) {
+// 			        var textValues = oData.results.map(function(item) {
+// 			            return item.Xallb;
+// 			        });
+// 			        that.getView().byId("securityText").setText(textValues.join(", "));
+// 			    },
+// 			    error: function(oError) {
+// 			    }
+// 			});			
+// 		},
+// //////////////////////////////////////////////////////////////////종목ID TEXT - E
+
+	dateFormat: function(oDate){
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
                     // pattern: "dd/MM/yyyy"
             pattern: "yyyy.MM.dd."
