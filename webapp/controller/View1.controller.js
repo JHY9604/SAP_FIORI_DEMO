@@ -72,17 +72,9 @@ sap.ui.define([
 			// var oModelDetail = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZPJ_BDTRAN_TEST_SRV/");
 			
 			var that = this;
-<<<<<<< Upstream, based on 5d5c8becec4d1b09a4327620202c869a9fd93f37
-	
-	
-	
-		
-	oModelDetail.read("/Z_BDTRANSet", {
-=======
 
 		// oModelDetail.read("/Z_BDTRANSet", {
 			oMainModel.read("/Z_BDTRANSet", {
->>>>>>> 4a91641 20240719 commit -----jh
 			filters: [oFilter],
 			success:function(oData, response){
 		// 		// // 1000000016439
@@ -165,7 +157,6 @@ sap.ui.define([
 		});
 		},
 		
-<<<<<<< Upstream, based on 5d5c8becec4d1b09a4327620202c869a9fd93f37
 // //////////////////////////////////////////////////////////////////종목ID TEXT - S
 // 	setSecurityText: function(){
 // 			var oModel = new sap.ui.model.odata.v2.ODataModel("/sap/opu/odata/sap/ZPJ_BDTRAN_TEST_SRV/");
@@ -191,8 +182,6 @@ sap.ui.define([
 // 		},
 // //////////////////////////////////////////////////////////////////종목ID TEXT - E
 
-=======
->>>>>>> 4a91641 20240719 commit -----jh
 	dateFormat: function(oDate){
 			var oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
             	pattern: "yyyy.MM.dd."
