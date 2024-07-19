@@ -3,7 +3,7 @@
 	<pages>
 		<Page id="oPage" title="NOA ATS">
 
-			<Panel headerText="거래개요">
+			<Panel headerText="거래개요">  
 				<content>
 
 					<HBox>

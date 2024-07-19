@@ -264,7 +264,7 @@ sap.ui.define([
 	},
 
 		// SEARCH HELP
-		// Dialog open
+		// Dialog open   
 		onDialogOpen: function(oId) {
 			var oView = this.getView();
 			var oDialog = oView.byId(oId);
