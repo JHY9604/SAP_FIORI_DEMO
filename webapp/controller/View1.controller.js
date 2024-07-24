@@ -11,6 +11,20 @@ sap.ui.define([
 	return Controller.extend("BOND_TEST3.controller.View1", {
 		
 		onInit: function () {
+		
+
+		var TodayDate = new Date();
+		var year = TodayDate.getFullYear();
+		var month = (TodayDate.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더함
+		var day = TodayDate.getDate().toString().padStart(2, '0'); // 날짜가 한 자리일 경우 앞에 0을 추가
+
+// YYYY.MM.DD 형식으로 변환
+		var formattedDate = year + '.' + month + '.' + day;
+		
+		this.byId("companyCode").setValue("1000");
+		this.byId("tradingDate").setValue(formattedDate);
+		this.byId("curr").setValue("KRW");
+		
 			
     	var sUrl = "/sap/opu/odata/sap/ZPJ_BDTRAN_TEST_SRV/";
     	oMainModel = new sap.ui.model.odata.ODataModel(sUrl, true);
@@ -289,20 +303,24 @@ onCal: function() {
     // Convert dates to timestamps
     var tradingDateTimestamp = this.convertDateToTimestamp(tradingDate);
     var payMentDateTimestamp = this.convertDateToTimestamp(payMentDate);
+    var that = this;
     
     // Construct the entry object
     var oEntry = {
         CompanyCode: this.getView().byId("companyCode").getValue(),
-        Zdatasrc: this.getView().byId("zdataSrc").getValue(),
+        // Zdatasrc: this.getView().byId("zdataSrc").getValue(),
         SecurityId: this.getView().byId("securityId").getValue(),
         Sfhaart: this.getView().byId("sfhaart").getValue(),
         ProductType: this.getView().byId("productType").getValue(),
-        SecurityAccount: this.getView().byId("securityAccount").getValue(),
-        Rrate: this.getView().byId("rrate").getValue(),
+        // SecurityAccount: this.getView().byId("securityAccount").getValue(),
+        // Rrate: this.getView().byId("rrate").getValue(),
         NominalAmt: this.getView().byId("nominalAmt").getValue(),
         NominalCurr: "KRW",
         TradingDate: tradingDateTimestamp,
-        PaymentDate: payMentDateTimestamp
+        PaymentDate: payMentDateTimestamp,
+        Zprice3: this.getView().byId("zprice2").getValue(),
+        Xbnwhr: this.getView().byId("nominalAmt").getValue(),
+        // Rrate: this.getView().byId("rrate").getValue()
     };
 
     // Log the entry object
@@ -318,16 +336,23 @@ onCal: function() {
 
     // Calculate type
     var calType = this.getView().byId("calType").getSelectedButton().getText();
+    console.log(calType);
     if (calType === "단가") {
         oEntry.Xzprice11 = "X";
     } else {
         oEntry.Xzprice22 = "X";
     }
-
+	
     // Create the data
-    oMainModel.create("/ZCalcDataSet", oEntry, {
+    oMainModel.create("/ZCalcSet", oEntry, {
         success: function(oData, response) {
             alert("성공");
+            
+        	console.log(oData);
+    	var Data = oData;
+		that.byId("rrate").setValue(Data.Rrate);
+		that.byId("zprice1").setValue(Data.Zprice1);
+		
         },
         error: function(oError) {
             alert("실패");

@@ -369,10 +369,8 @@ displayBlock="true">
 								
 			
 								<Label text="적용단가" labelFor="zprice2"/>
-								<HBox>
-									<Input id="zprice2"/>
-									<CheckBox text="10,000단가" selected="" class="per"/>								
-								</HBox>
+								<Input id="zprice2"/>
+								<CheckBox text="10,000단가" selected="" class="per"/>								
 							</VBox>
 						
 
