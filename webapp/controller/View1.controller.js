@@ -92,8 +92,16 @@ sap.ui.define([
 				
 				// that.getView().byId("curr").setValue(data[0].PaymentDate); // 통화
 				
-				that.getView().byId("tradingDate").setValue(that.dateFormat(data[0].TradingDate)); // 거래일
-				that.getView().byId("payMentDate").setValue(that.dateFormat(data[0].PaymentDate)); // 결제일
+				
+				var tradingDatePicker = that.getView().byId("tradingDate");
+				tradingDatePicker.setValue(that.dateFormat(data[0].TradingDate));
+				var payMentDatePicker = that.getView().byId("payMentDate");
+				payMentDatePicker.setValue(that.dateFormat(data[0].PaymentDate));
+				
+
+				// that.getView().byId("tradingDate").setValue(that.dateFormat(data[0].TradingDate)); // 거래일
+				// that.getView().byId("payMentDate").setValue(that.dateFormat(data[0].PaymentDate)); // 결제일
+				
 				
 				that.getView().byId("nominalAmt").setValue(data[0].NominalAmt); // 액 면
 				that.getView().byId("rrate").setValue(data[0].Rrate); // 수 익 률
@@ -144,7 +152,7 @@ sap.ui.define([
 				that.managerText();
 				alert('조회 성공');
 				
-				
+	
 				
 			},
 			error: function(oError) {
@@ -204,6 +212,8 @@ sap.ui.define([
 		var oDatePicker = this.getView().byId(oValue);
 		var oDate = oDatePicker.getDateValue(); // Date 객체 반환
 		
+		console.log(oDate);
+		
 		var sFormatDate = null;
 		
 		if (oDate) {
@@ -212,56 +222,135 @@ sap.ui.define([
 		}
 		return sFormatDate;
 	},
-	
+
+///////////////////////////////////////////////////////////////  수정 전
 // 계산 
-	onCal: function( ){
-		
-			var oEntry = {
-				CompanyCode: this.getView().byId("companyCode").getValue(),
-				Zdatasrc: this.getView().byId("zdataSrc").getValue(),
-				SecurityId: this.getView().byId("securityId").getValue(),
-				Sfhaart: this.getView().byId("sfhaart").getValue(),
-				ProductType: this.getView().byId("productType").getValue(),
-				PaymentDate: this.oDataDtFormat("payMentDate"),
-				TradingDate: this.oDataDtFormat("tradingDate"),
-				SecurityAccount: this.getView().byId("securityAccount").getValue(),
-				Rrate: this.getView().byId("rrate").getValue(),
-				NominalAmt: this.getView().byId("nominalAmt").getValue(),
-				NominalCurr: "KRW"               
-			};
+// 	onCal: function( ){
+// 				// 		var tradingDateValue = tradingDatePicker.getValue();
+// 				// var PaymentDate = payMentDatePicker.getValue();
 			
-			var realTrade = this.getView().byId("realTrade").getSelected();
-			if (realTrade){
-				oEntry.PositionDate = this.oDataDtFormat("tradingDate");
-			}
-			else{
-				oEntry.PositionDate = this.oDataDtFormat("payMentDate");
-			}
-			
-			// 계산구분
-			var calType = this.getView().byId("calType").getSelectedButton().getText(); 
-			if (calType === "단가"){
-				oEntry.Xzprice11 = "X";
-			}
-			else{
-				oEntry.Xzprice22 = "X";
-			}
-			
-			console.log(oEntry);
-			
-			
-			oMainModel.create("/ZCalcDataSet", oEntry,{
+    			
+// 			var oEntry = {
+// 				CompanyCode: this.getView().byId("companyCode").getValue(),
+// 				Zdatasrc: this.getView().byId("zdataSrc").getValue(),
+// 				SecurityId: this.getView().byId("securityId").getValue(),
+// 				Sfhaart: this.getView().byId("sfhaart").getValue(),
+// 				ProductType: this.getView().byId("productType").getValue(),
+
+// 				SecurityAccount: this.getView().byId("securityAccount").getValue(),
+// 				Rrate: this.getView().byId("rrate").getValue(),
+// 				NominalAmt: this.getView().byId("nominalAmt").getValue(),
+// 				NominalCurr: "KRW",
+
+// 				TradingDate: this.getView().byId("tradingDate").getValue(),	
+// 				PaymentDate: this.getView().byId("payMentDate").getValue()				
+// 			};
+
+// 				// PaymentDate: this.oDataDtFormat("payMentDate"),
+// 				// TradingDate: this.oDataDtFormat("tradingDate"),
 				
-				success: function(oData, response){
-					alert("성공");
-				},
-				error: function(oError){
-					alert("실패");
-				},
-				async: false
-			});
+// 			console.log(oEntry);
 			
-	},
+// 			var realTrade = this.getView().byId("realTrade").getSelected();
+// 			if (realTrade){
+// 				oEntry.PositionDate = this.oDataDtFormat("tradingDate");
+// 			}
+// 			else{
+// 				oEntry.PositionDate = this.oDataDtFormat("payMentDate");
+// 			}
+			
+// 			// 계산구분
+// 			var calType = this.getView().byId("calType").getSelectedButton().getText(); 
+// 			if (calType === "단가"){
+// 				oEntry.Xzprice11 = "X";
+// 			}
+// 			else{
+// 				oEntry.Xzprice22 = "X";
+// 			}
+			
+// 			oMainModel.create("/ZCalcDataSet", oEntry,{
+				
+// 				success: function(oData, response){
+// 					alert("성공");
+// 				},
+// 				error: function(oError){
+// 					alert("실패");
+// 				},
+// 				async: false
+// 			});
+			
+// 	},
+///////////////////////////////////////////////////////////////  수정 전
+onCal: function() {
+    // Get values from the view
+    var tradingDate = this.getView().byId("tradingDate").getValue();
+    var payMentDate = this.getView().byId("payMentDate").getValue();
+    
+    // Convert dates to timestamps
+    var tradingDateTimestamp = this.convertDateToTimestamp(tradingDate);
+    var payMentDateTimestamp = this.convertDateToTimestamp(payMentDate);
+    
+    // Construct the entry object
+    var oEntry = {
+        CompanyCode: this.getView().byId("companyCode").getValue(),
+        Zdatasrc: this.getView().byId("zdataSrc").getValue(),
+        SecurityId: this.getView().byId("securityId").getValue(),
+        Sfhaart: this.getView().byId("sfhaart").getValue(),
+        ProductType: this.getView().byId("productType").getValue(),
+        SecurityAccount: this.getView().byId("securityAccount").getValue(),
+        Rrate: this.getView().byId("rrate").getValue(),
+        NominalAmt: this.getView().byId("nominalAmt").getValue(),
+        NominalCurr: "KRW",
+        TradingDate: tradingDateTimestamp,
+        PaymentDate: payMentDateTimestamp
+    };
+
+    // Log the entry object
+    console.log(oEntry);
+
+    // Determine PositionDate based on realTrade selection
+    // var realTrade = this.getView().byId("realTrade").getSelected();
+    // if (realTrade) {
+    //     oEntry.PositionDate = this.convertDateToTimestamp(tradingDate);
+    // } else {
+    //     oEntry.PositionDate = this.convertDateToTimestamp(payMentDate);
+    // }
+
+    // Calculate type
+    var calType = this.getView().byId("calType").getSelectedButton().getText();
+    if (calType === "단가") {
+        oEntry.Xzprice11 = "X";
+    } else {
+        oEntry.Xzprice22 = "X";
+    }
+
+    // Create the data
+    oMainModel.create("/ZCalcDataSet", oEntry, {
+        success: function(oData, response) {
+            alert("성공");
+        },
+        error: function(oError) {
+            alert("실패");
+        },
+        async: false
+    });
+},
+
+convertDateToTimestamp: function(dateString) {
+var dateStr = dateString;
+
+// 문자열을 분리하여 연도, 월, 일을 추출
+var parts = dateStr.split(".");
+var year = parts[0];
+var month = parts[1];
+var day = parts[2];
+
+// 형식에 맞게 조합
+var formattedDate = year + month + day;
+return formattedDate;
+console.log(formattedDate);
+
+},
 
 		// SEARCH HELP
 		// Dialog open   
@@ -271,6 +360,7 @@ sap.ui.define([
 
 			oDialog.open();
 		},
+		
 		// Dialog cancel	
 		onDialogClose: function(oId) {
 			this.getView().byId(oId).close();
