@@ -16,9 +16,10 @@ displayBlock="true">
 						<Button text="조회" width="100px" press="onSelect"/>
 						<Button text="새로고침"  icon="sap-icon://refresh" press="onRefresh"/>
 						<Button text="저장" icon="sap-icon://save" press="onSave"/>
-						<Button text="분개내역조회" press="onBungae"/>
-
+						<Button text="분개내역조회" press="onDisplayBungae"/>
 					</HBox>
+					
+		
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="leftVBoxStyle">
 							<Label text="회사코드" labelFor="companyCode"/>
@@ -27,37 +28,7 @@ displayBlock="true">
 							<Text text="회사코드명" id="cocdText" class="cocdCode"/>
 							</HBox>
 							</VBox>		
-<!-- ********************************Cocd Value Help DIALOG Start***************************** -->
-							<Dialog id="HCompanyCode" title="회사코드">
-    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="CoCdTable" items="{/HT001Set}">
-    					    	<columns>
-    					    		<Column>
-    					    			<Text text="CoCd"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="회사이름"/>
-    					    		</Column>
-    					    	</columns>
-    					    <items>
-								<ColumnListItem vAlign="Middle">
-									<cells>
-										<Text text="{Bukrs}"/>
-										<Text text="{Butxt}"/>
-									</cells>
-								</ColumnListItem>    					    	
-    					    </items>
-    					    </Table>
-    					    
- 
-    						<beginButton>
-        						<Button text="OK" press="onCocdOk"/>
-    						</beginButton>
-    						
-    						<endButton>
-        						<Button text="Cancel" press="onCocdCancel"/>
-    						</endButton>
-    					</Dialog>									
-<!-- ********************************Cocd Value Help DIALOG End***************************** -->								
+							
                 		<VBox class="rightVBoxStyle">
                     		<Label text="BDC 모드" labelFor="bdcMode"/>
 							  <ComboBox id="bdcMode" width="200px" placeholder="Select an item">
@@ -77,38 +48,7 @@ displayBlock="true">
 							<Text text="" id="securityText" class="securityId"/>
 							</HBox>
 						</VBox>							
-<!-- ********************************종목ID Value Help DIALOG Start***************************** -->		
-							<Dialog id="HSecurity" title="종목ID">
-							<SearchField id="securitySearch" search="onSecuritySearch"/>
-    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="securityTable" items="{/ZhcfmcmranlBdSet}">
-    					    	<columns>
-    					    		<Column>
-    					    			<Text text="종목ID"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="긴 이름"/>
-    					    		</Column>
-    					    	</columns>
-    					    <items>
-								<ColumnListItem vAlign="Middle">
-									<cells>
-										<Text text="{Ranl}"/>
-										<Text text="{Xallb}"/>
-									</cells>
-								</ColumnListItem>    					    	
-    					    </items>
-    					    </Table>
-    					    
- 
-    						<beginButton>
-        						<Button text="OK" press="onSecurityOk"/>
-    						</beginButton>
-    						
-    						<endButton>
-        						<Button text="Cancel" press="onSecurityCancel"/>
-    						</endButton>
-    					</Dialog>	
-<!-- ********************************종목ID Value Help DIALOG End***************************** -->								
+							
 						<VBox class="rightVBoxStyle">
 							<Label text="상태" labelFor="status"/>
 							  <ComboBox id="status" width="200px" placeholder="Select an item" items="{ path: '/ZDSTATUSSet' }">
@@ -125,47 +65,7 @@ displayBlock="true">
 							<Text text="" id="productText" class="productTextId"/>
 							</HBox>
 						</VBox>							
-<!-- ********************************상품유형 Value Help DIALOG Start***************************** -->							
-							<Dialog id="HPtype" title="상품유형">
-    					    <SearchField id="searchField" search="onPTypSearch"/>
-
-    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="pTypTable" items="{/HTzpaSet}">
-    					    	<columns>
-    					    		<Column>
-    					    			<Text text="PTyp"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="텍스트"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="계약유형"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="PrC"/>
-    					    		</Column>    					    		
-    					    	</columns>
-    					    	
-    					    	<items>
-									<ColumnListItem vAlign="Middle">
-										<cells>
-											<Text text="{Gsart}"/>
-											<Text text="{Ltx}"/>
-											<Text text="{Rantyp}"/>
-											<Text text="{Sanlf}"/>											
-										</cells>
-									</ColumnListItem>    					    	
-    					    	</items>
-    					    </Table>
-
-    						<beginButton>
-        						<Button text="OK" press="onPTypeOk"/>
-    						</beginButton>
-    						
-    						<endButton>
-        						<Button text="Cancel" press="onPTypeCancel"/>
-    						</endButton>
-    					</Dialog>
-<!-- ********************************상품유형 Value Help DIALOG End***************************** -->								
+								
 						<VBox>
 							<Label text="거래번호" labelFor="dealNumber"/>
 							<Input id="dealNumber" submit="onSelect" showValueHelp="true" valueHelpRequest="onRfhaHelp"/>
@@ -256,43 +156,7 @@ displayBlock="true">
 							<Text text="" id="sfhaartText" class="sfhaartTextId"/>
 							</HBox>
    						</VBox>							
-<!-- ********************************거래유형 Value Help DIALOG Start***************************** -->							
-							<Dialog id="SfhaartDialog" title="거래유형">
-    					    <SearchField id="sfhaartSearch" search="onSfhaartSearch"/>
 
-    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="sfhaartTable" items="{/HsfhaartSet}">
-    					    	<columns>
-    					    		<Column>
-    					    			<Text text="PTyp"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="TTyp"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="거래유형이름"/>
-    					    		</Column>
-    					    	</columns>
-    					    	
-    					    	<items>
-									<ColumnListItem vAlign="Middle">
-										<cells>
-											<Text text="{Sgsart}"/>
-											<Text text="{Sfhaart}"/>
-											<Text text="{Xtext}"/>
-										</cells>
-									</ColumnListItem>    					    	
-    					    	</items>
-    					    </Table>
-
-    						<beginButton>
-        						<Button text="OK" press="onSfhhartOk"/>
-    						</beginButton>
-    						
-    						<endButton>
-        						<Button text="Cancel" press="onSfhhartCancel"/>
-    						</endButton>
-    					</Dialog>
-<!-- ********************************거래유형 Value Help DIALOG End***************************** -->
 						<VBox class="rightBoxStyle">
 							<Label text="구,포지션ID" labelFor="expId"/>
 							<Input id="expId"/>
@@ -439,94 +303,13 @@ displayBlock="true">
 							</VBox>
 						</HBox>
 						
-<!-- ********************************거래처 Value Help DIALOG Start*************************** -->	
-						<Dialog id="kontrhDialog" title="거래처">
-    					    <SearchField id="kontrhSearch" search="onKontrhSearch"/>
-    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="kontrhTable" items="{/ZhkonrthSet}">
-    					    	<columns>
-    					    		<Column>
-    					    			<Text text="Partner"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="Name 1"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="Name 2"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="F0004"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="F0005"/>
-    					    		</Column>    					    		
-    					    	</columns>
-    					    <items>
-								<ColumnListItem vAlign="Middle">
-									<cells>
-										<Text text="{Partner}"/>
-										<Text text="{NameOrg1}"/>
-										<Text text="{NameOrg2}"/>							
-										<Text text="{BuSort1}"/>
-										<Text text="{BuSort2}"/>
-									
-									</cells>
-								</ColumnListItem>    					    	
-    					    </items>
-    					    </Table>
-    					    
-    						<beginButton>
-        						<Button text="OK" press="onKontrhOk"/>
-    						</beginButton>
-    						
-    						<endButton>
-        						<Button text="Cancel" press="onKontrhCancle"/>
-    						</endButton>
-    					</Dialog>
-<!-- ********************************거래처 Value Help DIALOG End***************************** -->	
+
 						
 						<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 							<VBox class="rightBoxStyle">
 								<Label text="당사계좌"/>
 								<Input id="hbkid" showValueHelp="true" valueHelpRequest="onHbkidHelp"/>
-<!-- ********************************당사계좌 Value Help DIALOG Start***************************** -->	
-							<Dialog id="HHbkid" title="당사계좌">
-    					    <SearchField id="searchField2" search="onHbkidSearch"/>
-    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="hbkidTable" items="{/HT012Set}">
-    					    	<columns>
-    					    		<Column>
-    					    			<Text text="거래은행"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="계정ID"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="은행 계좌"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="내역"/>
-    					    		</Column>
-    					    	</columns>
-    					    <items>
-								<ColumnListItem vAlign="Middle">
-									<cells>
-										<Text text="{Hbkid}"/>
-										<Text text="{Hktid}"/>
-										<Text text="{Bankn}"/>
-										<Text text="{Text1}"/>
-									</cells>
-								</ColumnListItem>    					    	
-    					    </items>
-    					    </Table>
-    					    
-    						<beginButton>
-        						<Button text="OK" press="onHbkidOk"/>
-    						</beginButton>
-    						
-    						<endButton>
-        						<Button text="Cancel" press="onHbkidCancel"/>
-    						</endButton>
-    					</Dialog>
-<!-- ********************************당사계좌 Value Help DIALOG End***************************** -->	
+	
 							</VBox>
 							<VBox class="bottom">
 								<!--<Label text="　"/ labelFor="hktid">-->
@@ -571,36 +354,7 @@ displayBlock="true">
 						</VBox>
 					</HBox>
 					
-<!-- ********************************계정구분 Value Help DIALOG Start*************************** -->
-					<Dialog id="portDialog" title="계정구분">
-    			    <Table mode="SingleSelectMaster" selectionChange="onPortTable" id="portTable" items="{/ZhcfmcmRportbSet}">
-    			    	<columns>
-    			    		<Column>
-    			    			<Text text="포트폴리오"/>
-    			    		</Column>
-    			    		<Column>
-    			    			<Text text="포트폴리오 이름"/>
-    			    		</Column>
-    			    	</columns>
-    			    <items>
-						<ColumnListItem vAlign="Middle">
-							<cells>
-								<Text text="{Rportb}"/>
-								<Text text="{Xportb}"/>
-							</cells>
-						</ColumnListItem>    					    	
-    			    </items>
-    			    </Table>
-    			    
-    				<beginButton>
-        				<Button text="OK" press="onPortOk"/>
-    				</beginButton>
-    				
-    				<endButton>
-        				<Button text="Cancel" press="onPortCancel"/>
-    				</endButton>
-    			</Dialog>
-<!-- ********************************계정구분 Value Help DIALOG End***************************** -->
+
 					
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="rightBoxStyle">
@@ -621,38 +375,6 @@ displayBlock="true">
 							</HBox>
 						</VBox>
 					</HBox>
-					
-<!-- ********************************운용역 Value Help DIALOG Start*************************** -->
-					<Dialog id="managerDialog" title="계정구분">
-    			    <Table mode="SingleSelectMaster" selectionChange="onManagerTable" id="managerTable" items="{/ZhmanagerSet}">
-    			    	<columns>
-    			    		<Column>
-    			    			<Text text="운용역"/>
-    			    		</Column>
-    			    		<Column>
-    			    			<Text text="운용역 이름"/>
-    			    		</Column>
-    			    	</columns>
-    			    <items>
-						<ColumnListItem vAlign="Middle">
-							<cells>
-								<Text text="{Manager}"/>
-								<Text text="{Manager_nm}"/>
-							</cells>
-						</ColumnListItem>    					    	
-    			    </items>
-    			    </Table>
-    			    
-    				<beginButton>
-        				<Button text="OK" press="onManagerOk"/>
-    				</beginButton>
-    				
-    				<endButton>
-        				<Button text="Cancel" press="onManagerCancle"/>
-    				</endButton>
-    			</Dialog>
-<!-- ********************************운용역 Value Help DIALOG End***************************** -->					
-					
 					
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="rightBoxStyle">
@@ -841,11 +563,382 @@ displayBlock="true">
 					</HBox>						
 					
 				</Panel>
-				
 			</Panel>
 		
 		</HBox>
 		</Page>
-	</pages>
+	</pages>				
+<!-- ********************************종목ID Value Help DIALOG Start***************************** -->		
+							<Dialog id="HSecurity" title="종목ID">
+							<SearchField id="securitySearch" search="onSecuritySearch"/>
+    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="securityTable" items="{/ZhcfmcmranlBdSet}">
+    					    	<columns>
+    					    		<Column>
+    					    			<Text text="종목ID"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="긴 이름"/>
+    					    		</Column>
+    					    	</columns>
+    					    <items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Text text="{Ranl}"/>
+										<Text text="{Xallb}"/>
+									</cells>
+								</ColumnListItem>    					    	
+    					    </items>
+    					    </Table>
+    					    
+ 
+    						<beginButton>
+        						<Button text="OK" press="onSecurityOk"/>
+    						</beginButton>
+    						
+    						<endButton>
+        						<Button text="Cancel" press="onSecurityCancel"/>
+    						</endButton>
+    					</Dialog>	
+<!-- ********************************종목ID Value Help DIALOG End***************************** -->					
+<!-- ********************************당사계좌 Value Help DIALOG Start***************************** -->	
+							<Dialog id="HHbkid" title="당사계좌">
+    					    <SearchField id="searchField2" search="onHbkidSearch"/>
+    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="hbkidTable" items="{/HT012Set}">
+    					    	<columns>
+    					    		<Column>
+    					    			<Text text="거래은행"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="계정ID"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="은행 계좌"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="내역"/>
+    					    		</Column>
+    					    	</columns>
+    					    <items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Text text="{Hbkid}"/>
+										<Text text="{Hktid}"/>
+										<Text text="{Bankn}"/>
+										<Text text="{Text1}"/>
+									</cells>
+								</ColumnListItem>    					    	
+    					    </items>
+    					    </Table>
+    					    
+    						<beginButton>
+        						<Button text="OK" press="onHbkidOk"/>
+    						</beginButton>
+    						
+    						<endButton>
+        						<Button text="Cancel" press="onHbkidCancel"/>
+    						</endButton>
+    					</Dialog>
+<!-- ********************************당사계좌 Value Help DIALOG End***************************** -->
+<!-- ********************************상품유형 Value Help DIALOG Start***************************** -->							
+							<Dialog id="HPtype" title="상품유형">
+    					    <SearchField id="searchField" search="onPTypSearch"/>
+
+    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="pTypTable" items="{/HTzpaSet}">
+    					    	<columns>
+    					    		<Column>
+    					    			<Text text="PTyp"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="텍스트"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="계약유형"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="PrC"/>
+    					    		</Column>    					    		
+    					    	</columns>
+    					    	
+    					    	<items>
+									<ColumnListItem vAlign="Middle">
+										<cells>
+											<Text text="{Gsart}"/>
+											<Text text="{Ltx}"/>
+											<Text text="{Rantyp}"/>
+											<Text text="{Sanlf}"/>											
+										</cells>
+									</ColumnListItem>    					    	
+    					    	</items>
+    					    </Table>
+
+    						<beginButton>
+        						<Button text="OK" press="onPTypeOk"/>
+    						</beginButton>
+    						
+    						<endButton>
+        						<Button text="Cancel" press="onPTypeCancel"/>
+    						</endButton>
+    					</Dialog>
+<!-- ********************************상품유형 Value Help DIALOG End***************************** -->
+<!-- ********************************계정구분 Value Help DIALOG Start*************************** -->
+					<Dialog id="portDialog" title="계정구분">
+    			    <Table mode="SingleSelectMaster" selectionChange="onPortTable" id="portTable" items="{/ZhcfmcmRportbSet}">
+    			    	<columns>
+    			    		<Column>
+    			    			<Text text="포트폴리오"/>
+    			    		</Column>
+    			    		<Column>
+    			    			<Text text="포트폴리오 이름"/>
+    			    		</Column>
+    			    	</columns>
+    			    <items>
+						<ColumnListItem vAlign="Middle">
+							<cells>
+								<Text text="{Rportb}"/>
+								<Text text="{Xportb}"/>
+							</cells>
+						</ColumnListItem>    					    	
+    			    </items>
+    			    </Table>
+    			    
+    				<beginButton>
+        				<Button text="OK" press="onPortOk"/>
+    				</beginButton>
+    				
+    				<endButton>
+        				<Button text="Cancel" press="onPortCancel"/>
+    				</endButton>
+    			</Dialog>
+<!-- ********************************계정구분 Value Help DIALOG End***************************** -->				
+<!-- ********************************종목ID Value Help DIALOG Start***************************** -->		
+							<Dialog id="JournalDial" title="분개내역조회">
+							<content>
+							<HBox>
+							<VBox width="20%">
+							<Label text="종목ID"></Label>
+							<Text text="40040000" id="securityIdText"/>
+							
+							<Label text="유가증권계정"></Label>
+							<Text text="AA1111"></Text>		
+							
+							<Label text="거래일"></Label>
+							<Text text="2024.07.25" id="tradeDate"/>							
+							</VBox>
+							<VBox width="20%">
+							<Label text="종목명"></Label>
+							<Text text="국고" id="SecurityNameText"/>
+							
+							<Label text="선물계정"></Label>
+							<Text text="N/A" id="Account"/>
+							
+							<Label text="결제일"></Label>
+							<Text text="2024.07.25" id="paymentDate"/>	
+							</VBox>
+							
+							<VBox  width="20%">
+							<Label text="거래번호"></Label>
+							<Text text="100000" id="tradeNum"/>		
+							
+							<Label text="거래번호2"></Label>
+							<Text text="N/A" id="tradeNum2"/>
+							
+							<Label text="환율"></Label>
+							<Text text="N/A" id="curre"/>							
+							</VBox>
+							
+							</HBox>
+    					    <Table mode="SingleSelectMaster" id="JournalTable" items="{/}">
+    					    	<columns>
+    					    		<Column>
+    					    			<Text text="갱신유형"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="차변G/L계정"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="차변G/L계계정명"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="차변금액(원화)"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="대변G/L계정"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="대변G/L계정명"/>
+    					    		</Column>   
+    					    		<Column>
+    					    			<Text text="대변금액(원화)"/>
+    					    		</Column>     	
+    					    		<Column>
+    					    			<Text text="현지통화"/>
+    					    		</Column>     	    					    		
+    					    	</columns>
+    					    <items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Text text="{}"/>
+										<Text text="{}"/>
+										<Text text="{}"/>
+										<Text text="{}"/>
+										<Text text="{}"/>
+										<Text text="{}"/>
+										<Text text="{}"/>
+										<Text text="{}"/>										
+									</cells>
+								</ColumnListItem>    					    	
+    					    </items>
+    					    </Table>
+    					    </content>
+    						<endButton>
+        						<Button text="Cancel" press="onDisplaytCancel"/>
+    						</endButton>
+    						
+    					</Dialog>	
+ <!-- ********************************종목ID Value Help DIALOG End***************************** -->	
+ <!-- ********************************Cocd Value Help DIALOG Start***************************** -->
+							<Dialog id="HCompanyCode" title="회사코드">
+    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="CoCdTable" items="{/HT001Set}">
+    					    	<columns>
+    					    		<Column>
+    					    			<Text text="CoCd"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="회사이름"/>
+    					    		</Column>
+    					    	</columns>
+    					    <items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Text text="{Bukrs}"/>
+										<Text text="{Butxt}"/>
+									</cells>
+								</ColumnListItem>    					    	
+    					    </items>
+    					    </Table>
+    					    
+ 
+    						<beginButton>
+        						<Button text="OK" press="onCocdOk"/>
+    						</beginButton>
+    						
+    						<endButton>
+        						<Button text="Cancel" press="onCocdCancel"/>
+    						</endButton>
+    					</Dialog>									
+<!-- ********************************Cocd Value Help DIALOG End***************************** -->	
+<!-- ********************************운용역 Value Help DIALOG Start*************************** -->
+					<Dialog id="managerDialog" title="계정구분">
+    			    <Table mode="SingleSelectMaster" selectionChange="onManagerTable" id="managerTable" items="{/ZhmanagerSet}">
+    			    	<columns>
+    			    		<Column>
+    			    			<Text text="운용역"/>
+    			    		</Column>
+    			    		<Column>
+    			    			<Text text="운용역 이름"/>
+    			    		</Column>
+    			    	</columns>
+    			    <items>
+						<ColumnListItem vAlign="Middle">
+							<cells>
+								<Text text="{Manager}"/>
+								<Text text="{Manager_nm}"/>
+							</cells>
+						</ColumnListItem>    					    	
+    			    </items>
+    			    </Table>
+    			    
+    				<beginButton>
+        				<Button text="OK" press="onManagerOk"/>
+    				</beginButton>
+    				
+    				<endButton>
+        				<Button text="Cancel" press="onManagerCancle"/>
+    				</endButton>
+    			</Dialog>
+<!-- ********************************운용역 Value Help DIALOG End***************************** -->		 
+<!-- ********************************거래처 Value Help DIALOG Start*************************** -->	
+						<Dialog id="kontrhDialog" title="거래처">
+    					    <SearchField id="kontrhSearch" search="onKontrhSearch"/>
+    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="kontrhTable" items="{/ZhkonrthSet}">
+    					    	<columns>
+    					    		<Column>
+    					    			<Text text="Partner"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="Name 1"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="Name 2"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="F0004"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="F0005"/>
+    					    		</Column>    					    		
+    					    	</columns>
+    					    <items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Text text="{Partner}"/>
+										<Text text="{NameOrg1}"/>
+										<Text text="{NameOrg2}"/>							
+										<Text text="{BuSort1}"/>
+										<Text text="{BuSort2}"/>
+									
+									</cells>
+								</ColumnListItem>    					    	
+    					    </items>
+    					    </Table>
+    					    
+    						<beginButton>
+        						<Button text="OK" press="onKontrhOk"/>
+    						</beginButton>
+    						
+    						<endButton>
+        						<Button text="Cancel" press="onKontrhCancle"/>
+    						</endButton>
+    					</Dialog>
+<!-- ********************************거래처 Value Help DIALOG End***************************** -->	
+
+<!-- ********************************거래유형 Value Help DIALOG Start***************************** -->							
+							<Dialog id="SfhaartDialog" title="거래유형">
+    					    <SearchField id="sfhaartSearch" search="onSfhaartSearch"/>
+
+    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="sfhaartTable" items="{/HsfhaartSet}">
+    					    	<columns>
+    					    		<Column>
+    					    			<Text text="PTyp"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="TTyp"/>
+    					    		</Column>
+    					    		<Column>
+    					    			<Text text="거래유형이름"/>
+    					    		</Column>
+    					    	</columns>
+    					    	
+    					    	<items>
+									<ColumnListItem vAlign="Middle">
+										<cells>
+											<Text text="{Sgsart}"/>
+											<Text text="{Sfhaart}"/>
+											<Text text="{Xtext}"/>
+										</cells>
+									</ColumnListItem>    					    	
+    					    	</items>
+    					    </Table>
+
+    						<beginButton>
+        						<Button text="OK" press="onSfhhartOk"/>
+    						</beginButton>
+    						
+    						<endButton>
+        						<Button text="Cancel" press="onSfhhartCancel"/>
+    						</endButton>
+    					</Dialog>
+<!-- ********************************거래유형 Value Help DIALOG End***************************** -->
+
 </App>
 </mvc:View>

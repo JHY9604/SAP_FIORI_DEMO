@@ -2,8 +2,9 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
-], function(Controller, JSONModel, Filter, FilterOperator) {
+	"sap/ui/model/FilterOperator",
+	"sap/ui/core/Fragment"
+], function(Controller, JSONModel, Filter, FilterOperator, Fragment) {
 	"use strict";
 	
 	var oMainModel;
@@ -840,7 +841,18 @@ console.log(formattedDate);
 		      async: false
 		  });			
 			
+		},
+		
+        onDisplayBungae: function () {
+			this.onDialogOpen("JournalDial");
+			
+        },
+        onDisplaytCancel: function(oEvent) {
+			this.onDialogClose("JournalDial");
 		}
+
+		
+		
 		// onBungae: function(oEvent){
 		// 	var sUr = "https://noams41.noaats.com:5245/sap/bc/ui2/flp?sap-client=100&sap-language=KO#TreasuryPosition-displayPostingLineItem";
 		// 	window.open(sUr, "_blank");
