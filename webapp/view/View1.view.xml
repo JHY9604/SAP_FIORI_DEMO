@@ -15,6 +15,9 @@ displayBlock="true">
 					<HBox>
 						<Button text="조회" width="100px" press="onSelect"/>
 						<Button text="새로고침"  icon="sap-icon://refresh" press="onRefresh"/>
+						<Button text="저장" icon="sap-icon://save" press="onSave"/>
+						<Button text="분개내역조회" press="onBungae"/>
+
 					</HBox>
 					<HBox justifyContent="SpaceBetween" class="HBoxStyle">
 						<VBox class="leftVBoxStyle">
@@ -380,7 +383,7 @@ displayBlock="true">
 						<VBox>
 							<Label text="시가"/>
 							<HBox>
-								<Input/>
+								<Input id="xbzbetr"/>
 								<CheckBox text="계산제외" selected="" class="per"/>							
 							</HBox>								
 						</VBox> 
