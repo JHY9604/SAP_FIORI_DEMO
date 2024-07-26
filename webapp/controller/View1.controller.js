@@ -847,7 +847,6 @@ sap.ui.define([
 		onDisplaytCancel: function(oEvent) {
 			this.onDialogClose("JournalDial");
 		},
-
 		onDelete: function() {
 			// Get values from the view
 			var tradingDate = this.getView().byId("tradingDate").getValue();
@@ -889,7 +888,32 @@ sap.ui.define([
 				},
 				async: false
 			});
-
+		},
+		
+		onSettle: function(oEvent){
+			
+				var payMentDate = this.getView().byId("payMentDate").getValue();
+				var payMentDateTimestamp = this.convertDateToTimestamp(payMentDate);			
+				var that = this;
+			var oEntry = {
+				CompanyCode: this.getView().byId("companyCode").getValue(),
+				DealNumber: this.getView().byId("dealNumber").getValue(),
+				Status: this.getView().byId("status").getValue(),
+				PaymentDate: payMentDateTimestamp
+			};
+			
+			console.log(oEntry);
+			
+			oMainModel.create("/ZsettleSet", oEntry, {
+				success: function(oData, response){
+					alert("성공");
+					that.onSelect();
+				},
+				error: function(oError){
+					alert("실패");
+				},
+				async: false
+			});
 		}
 
 		// onBungae: function(oEvent){
