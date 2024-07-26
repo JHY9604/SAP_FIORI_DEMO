@@ -16,6 +16,7 @@ displayBlock="true">
 						<Button text="조회" width="100px" press="onSelect"/>
 						<Button text="새로고침"  icon="sap-icon://refresh" press="onRefresh"/>
 						<Button text="저장" icon="sap-icon://save" press="onSave"/>
+						<Button text="정산" icon="sap-icon://crm-service-manager" press="onSettle" />
 						<Button text="분개내역조회" press="onDisplayBungae"/>
 					</HBox>
 					
@@ -70,69 +71,7 @@ displayBlock="true">
 							<Label text="거래번호" labelFor="dealNumber"/>
 							<Input id="dealNumber" submit="onSelect" showValueHelp="true" valueHelpRequest="onRfhaHelp"/>
 							
-							<Dialog id="HRfha" title="거래번호" afterClose="onDialogAfterClose">
-    					    <SearchField id="rfhaSearchField" search="onRfhaSearch"/>
-    					    
-    					    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="dealNumberTable" items="{/HRfhaSet}">
-    					    	<columns>
-    					    		<Column>
-    					    			<Text text="거래번호"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="표준코드"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="종목명"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="거래유형"/>
-    					    		</Column>    
-    					    		<Column>
-    					    			<Text text="거래일"/>
-    					    		</Column> 
-    					    		<Column>
-    					    			<Text text="거래처명"/>
-    					    		</Column> 
-    					    		<Column>
-    					    			<Text text="종목코드"/>
-    					    		</Column> 
-    					    		<Column>
-    					    			<Text text="유가증권계정"/>
-    					    		</Column> 
-    					    		<Column>
-    					    			<Text text="입력자"/>
-    					    		</Column>
-    					    		<Column>
-    					    			<Text text="최종수정자"/>
-    					    		</Column>
-    					    	</columns>
-    					    	
-    					    	<items>
-									<ColumnListItem vAlign="Middle">
-										<cells>
-											<Text text="{Rfha}"/>
-											<Text text="{Isin}"/>
-											<Text text="{SecurityIdT}"/>
-											<Text text="{SfhaartT}"/>
-											<Text text="{PositionDate}"/>
-											<Text text="{NameOrg1}"/>
-											<Text text="{Ranl}"/>
-											<Text text="{Rldepo}"/>
-											<Text text="{Cruser}"/>
-											<Text text="{Upuser}"/>
-										</cells>
-									</ColumnListItem>    					    	
-    					    	</items>
-    					    </Table>
-
-    						<beginButton>
-        						<Button text="OK" press="onRfhaOk"/>
-    						</beginButton>
-    						
-    						<endButton>
-        						<Button text="Cancel" press="onRfhaCancel"/>
-    						</endButton>
-    					</Dialog>
+							
 						</VBox>
 						
 						<VBox class="rightVBoxStyle">
@@ -939,6 +878,69 @@ displayBlock="true">
     						</endButton>
     					</Dialog>
 <!-- ********************************거래유형 Value Help DIALOG End***************************** -->
-
+<!-- ********************************거래번호 Value Help DIALOG Start***************************** -->
+<Dialog id="HRfha" title="거래번호" afterClose="onDialogAfterClose">
+    				    <SearchField id="rfhaSearchField" search="onRfhaSearch"/>
+    				    
+    				    <Table mode="SingleSelectMaster" selectionChange="onRowPress" id="dealNumberTable" items="{/HRfhaSet}">
+    				    	<columns>
+    				    		<Column>
+    				    			<Text text="거래번호"/>
+    				    		</Column>
+    				    		<Column>
+    				    			<Text text="표준코드"/>
+    				    		</Column>
+    				    		<Column>
+    				    			<Text text="종목명"/>
+    				    		</Column>
+    				    		<Column>
+    				    			<Text text="거래유형"/>
+    				    		</Column>    
+    				    		<Column>
+    				    			<Text text="거래일"/>
+    				    		</Column> 
+    				    		<Column>
+    				    			<Text text="거래처명"/>
+    				    		</Column> 
+    				    		<Column>
+    				    			<Text text="종목코드"/>
+    				    		</Column> 
+    				    		<Column>
+    				    			<Text text="유가증권계정"/>
+    				    		</Column> 
+    				    		<Column>
+    				    			<Text text="입력자"/>
+    				    		</Column>
+    				    		<Column>
+    				    			<Text text="최종수정자"/>
+    				    		</Column>
+    				    	</columns>
+    				    	
+    				    	<items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Text text="{Rfha}"/>
+										<Text text="{Isin}"/>
+										<Text text="{SecurityIdT}"/>
+										<Text text="{SfhaartT}"/>
+										<Text text="{PositionDate}"/>
+										<Text text="{NameOrg1}"/>
+										<Text text="{Ranl}"/>
+										<Text text="{Rldepo}"/>
+										<Text text="{Cruser}"/>
+										<Text text="{Upuser}"/>
+									</cells>
+								</ColumnListItem>    					    	
+    				    	</items>
+    				    </Table>
+    					<beginButton>
+        					<Button text="OK" press="onRfhaOk"/>
+    					</beginButton>
+    					
+    					<endButton>
+        					<Button text="Cancel" press="onRfhaCancel"/>
+    					</endButton>
+    				</Dialog>
+<!-- ********************************거래번호 Value Help DIALOG End***************************** -->
 </App>
 </mvc:View>
