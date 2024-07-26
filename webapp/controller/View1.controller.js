@@ -466,7 +466,6 @@ sap.ui.define([
 			oBinding.filter(oFilter);
 		},
 		onDialogAfterClose: function(oEvent) {
-			alert("close");
 			this.sQuery.setValue("");
 		},
 		//////////////////////////////////////////////////////////////////거래번호 Value Help - E
@@ -756,106 +755,147 @@ sap.ui.define([
 		},
 		// //////////////////////////////////////////////////////////////////거래처 Value Help - E
 		onSave: function(oEvent) {
-				// Convert Date
-				var tradingDate = this.getView().byId("tradingDate").getValue();
-				var payMentDate = this.getView().byId("payMentDate").getValue();
+			// Convert Date
+			var tradingDate = this.getView().byId("tradingDate").getValue();
+			var payMentDate = this.getView().byId("payMentDate").getValue();
 
-				var tradingDateTimestamp = this.convertDateToTimestamp(tradingDate);
-				var payMentDateTimestamp = this.convertDateToTimestamp(payMentDate);
-				var that = this;
+			var tradingDateTimestamp = this.convertDateToTimestamp(tradingDate);
+			var payMentDateTimestamp = this.convertDateToTimestamp(payMentDate);
+			// var that = this;
 
-				// Entry Object 
-				var oEntry = {
-					CompanyCode: this.getView().byId("companyCode").getValue(), // 회사코드
-					SecurityId: this.getView().byId("securityId").getValue(), // 종목ID
-					ProductType: this.getView().byId("productType").getValue(), // 상품유형
-					Sfhaart: this.getView().byId("sfhaart").getValue(), // 거래유형
-					DealNumber: this.getView().byId("dealNumber").getValue(), // 거래번호
-					
-						Status: this.getView().byId("status").getValue(), // 상태
-					//Zdatasrc: this.getView().byId("zdatasrc").getValue(),				// 데이터구분
-					//ExpId: this.getView().byid("expId").getValue(), 						// 구,포지션ID
+			// Entry Object 
+			var oEntry = {
+				CompanyCode: this.getView().byId("companyCode").getValue(), // 회사코드
+				SecurityId: this.getView().byId("securityId").getValue(), // 종목ID
+				ProductType: this.getView().byId("productType").getValue(), // 상품유형
+				Sfhaart: this.getView().byId("sfhaart").getValue(), // 거래유형
+				DealNumber: this.getView().byId("dealNumber").getValue(), // 거래번호
 
-					TradingDate: tradingDateTimestamp, // 거래일
-					PaymentDate: payMentDateTimestamp, // 결제일
-					NominalCurr: "KRW", // 통화
+				Status: this.getView().byId("status").getValue(), // 상태
+				//Zdatasrc: this.getView().byId("zdatasrc").getValue(),				// 데이터구분
+				//ExpId: this.getView().byid("expId").getValue(), 						// 구,포지션ID
 
-					Xbnwhr: this.getView().byId("nominalAmt").getValue(), // 액면
-					Rrate: this.getView().byId("rrate").getValue(), // 수익률
-					Zprice1: this.getView().byId("zprice1").getValue(), // 계산단가
-					Zprice4: this.getView().byId("zprice4").getValue(), // 단가조정
-					//Zprice3: this.getView().byId("zprice3").getValue(),					// 적용단가
-					Xbzbetr: this.getView().byId("xbzbetr").getValue(), // 시가
+				TradingDate: tradingDateTimestamp, // 거래일
+				PaymentDate: payMentDateTimestamp, // 결제일
+				NominalCurr: "KRW", // 통화
 
-					Xzamt18: this.getView().byId("tradeAmt").getValue(), // 매매금액
-					SettleAmt: this.getView().byId("settleAmt").getValue(), // 정산금액
-					IninAmt: this.getView().byId("ininAmt").getValue(), // 경과이자
+				Xbnwhr: this.getView().byId("nominalAmt").getValue(), // 액면
+				Rrate: this.getView().byId("rrate").getValue(), // 수익률
+				Zprice1: this.getView().byId("zprice1").getValue(), // 계산단가
+				Zprice4: this.getView().byId("zprice4").getValue(), // 단가조정
+				//Zprice3: this.getView().byId("zprice3").getValue(),					// 적용단가
+				Xbzbetr: this.getView().byId("xbzbetr").getValue(), // 시가
 
-					Kontrh: this.getView().byId("kontrh").getValue(), // 거래처
-					Hbkid: this.getView().byId("hbkid").getValue(), // 당사계좌	
-					Hktid: this.getView().byId("hktid").getValue(), // 당사계좌2
-					Sglzb: this.getView().byId("sglzb").getValue(), // 예탁처
+				Xzamt18: this.getView().byId("tradeAmt").getValue(), // 매매금액
+				SettleAmt: this.getView().byId("settleAmt").getValue(), // 정산금액
+				IninAmt: this.getView().byId("ininAmt").getValue(), // 경과이자
 
-					Portfolio: this.getView().byId("portfolio").getValue(), // 포트폴리오
-					AccountGroup: this.getView().byId("accountGroup").getValue(), // 운용펀드
-					Manager: this.getView().byId("manager").getValue(), // 운용역
-					OperPart: this.getView().byId("operPart").getValue(), // 운용부서
-					SecurityAccount: this.getView().byId("securityAccount").getValue(), // 유가증권계정
-					BuyDate: this.getView().byId("buyDate").getValue(), // 매입결제일
+				Kontrh: this.getView().byId("kontrh").getValue(), // 거래처
+				Hbkid: this.getView().byId("hbkid").getValue(), // 당사계좌	
+				Hktid: this.getView().byId("hktid").getValue(), // 당사계좌2
+				Sglzb: this.getView().byId("sglzb").getValue(), // 예탁처
 
-					StBdGbn: this.getView().byId("stBdGbn").getValue(), // 지분/채무구분
-					//BizModel: this.getView().byId("bizModel").getValue(),				// 사업모형평가
-					//SppiTest: this.getView().byId("sppiTest").getValue(),				// SPPI TEST
-					ComValClass: this.getView().byId("comValClass").getValue(), // 보유목적
-					FvociYn: this.getView().byId("fvociYn").getValue(), // FVOCI 지정여부
-					FvociRsn: this.getView().byId("fvociRsn").getValue(), // FVOCI 지정사유
+				Portfolio: this.getView().byId("portfolio").getValue(), // 포트폴리오
+				AccountGroup: this.getView().byId("accountGroup").getValue(), // 운용펀드
+				Manager: this.getView().byId("manager").getValue(), // 운용역
+				OperPart: this.getView().byId("operPart").getValue(), // 운용부서
+				SecurityAccount: this.getView().byId("securityAccount").getValue(), // 유가증권계정
+				BuyDate: this.getView().byId("buyDate").getValue(), // 매입결제일
 
-					XsecClass: this.getView().byId("xsecClass").getValue(), // 유가증권분류
-					XbondClass: this.getView().byId("xbondClass").getValue(), // 채권분류
-					Itcd: this.getView().byId("itcd").getValue(), // 이자지급방법
-					IssueDate: this.getView().byId("issueDate").getValue(), // 발행일
-					Cupr: this.getView().byId("cupr").getValue(), // 표면이자율
-					Ipyohal01: this.getView().byId("ipyohal01").getValue(), // 할인율
-					Szbmeth: this.getView().byId("szbmeth").getValue(), // 일수계산방법
-					Ittm: this.getView().byId("ittm").getValue(), // 이자계산주기
-					Eddt: this.getView().byId("eddt").getValue(), // 만기일
-					Zfrate1: this.getView().byId("zfrate1").getValue(), // FRN RATE1
-					Zfrate2: this.getView().byId("zfrate2").getValue(), // FRN RATE2
-					//Frnmt: this.getView().byId("frnmt").getValue(),						// FRN계산식
-					//Frnm: this.getView().byId("frnm").getValue(),						// FRN참조금리
-					Hidt: this.getView().byId("hidt").getValue(), // 최초이자지급일
-					Isin: this.getView().byId("isin").getValue(), // 표준코드
-					Xrfmd: this.getView().byId("xrfmd").getValue() // 상환방법
-				};
-		  // Create the data
-		  oMainModel.create("/Z_BDTRANSet", oEntry, {
-		      success: function(oData, response) {
-		          alert("성공");
-		         
-		      },
-		      error: function(oError) {
-		          alert("실패");
-		      },
-		      async: false
-		  });			
-			
+				StBdGbn: this.getView().byId("stBdGbn").getValue(), // 지분/채무구분
+				//BizModel: this.getView().byId("bizModel").getValue(),				// 사업모형평가
+				//SppiTest: this.getView().byId("sppiTest").getValue(),				// SPPI TEST
+				ComValClass: this.getView().byId("comValClass").getValue(), // 보유목적
+				FvociYn: this.getView().byId("fvociYn").getValue(), // FVOCI 지정여부
+				FvociRsn: this.getView().byId("fvociRsn").getValue(), // FVOCI 지정사유
+
+				XsecClass: this.getView().byId("xsecClass").getValue(), // 유가증권분류
+				XbondClass: this.getView().byId("xbondClass").getValue(), // 채권분류
+				Itcd: this.getView().byId("itcd").getValue(), // 이자지급방법
+				IssueDate: this.getView().byId("issueDate").getValue(), // 발행일
+				Cupr: this.getView().byId("cupr").getValue(), // 표면이자율
+				Ipyohal01: this.getView().byId("ipyohal01").getValue(), // 할인율
+				Szbmeth: this.getView().byId("szbmeth").getValue(), // 일수계산방법
+				Ittm: this.getView().byId("ittm").getValue(), // 이자계산주기
+				Eddt: this.getView().byId("eddt").getValue(), // 만기일
+				Zfrate1: this.getView().byId("zfrate1").getValue(), // FRN RATE1
+				Zfrate2: this.getView().byId("zfrate2").getValue(), // FRN RATE2
+				//Frnmt: this.getView().byId("frnmt").getValue(),						// FRN계산식
+				//Frnm: this.getView().byId("frnm").getValue(),						// FRN참조금리
+				Hidt: this.getView().byId("hidt").getValue(), // 최초이자지급일
+				Isin: this.getView().byId("isin").getValue(), // 표준코드
+				Xrfmd: this.getView().byId("xrfmd").getValue() // 상환방법
+			};
+			// Create the data
+			oMainModel.create("/Z_BDTRANSet", oEntry, {
+				success: function(oData, response) {
+					alert("성공");
+
+				},
+				error: function(oError) {
+					alert("실패");
+				},
+				async: false
+			});
+
 		},
-		
-        onDisplayBungae: function () {
+
+		onDisplayBungae: function() {
 			this.onDialogOpen("JournalDial");
-			
-        },
-        onDisplaytCancel: function(oEvent) {
+
+		},
+		onDisplaytCancel: function(oEvent) {
 			this.onDialogClose("JournalDial");
+		},
+
+		onDelete: function() {
+			// Get values from the view
+			var tradingDate = this.getView().byId("tradingDate").getValue();
+			var payMentDate = this.getView().byId("payMentDate").getValue();
+
+			// Convert dates to timestamps
+			var tradingDateTimestamp = this.convertDateToTimestamp(tradingDate);
+			var payMentDateTimestamp = this.convertDateToTimestamp(payMentDate);
+			// var that = this;
+
+			// Construct the entry object
+			var oEntry = {
+				CompanyCode: this.getView().byId("companyCode").getValue(),
+				SecurityId: this.getView().byId("securityId").getValue(),
+				DealNumber: this.getView().byId("dealNumber").getValue(),
+				Status : this.getView().byId("status").getValue(),
+					// Sfhaart: this.getView().byId("sfhaart").getValue(),
+					// ProductType: this.getView().byId("productType").getValue(),
+					// SecurityAccount: this.getView().byId("securityAccount").getValue(),
+					// Rrate: this.getView().byId("rrate").getValue(),
+					// NominalAmt: this.getView().byId("nominalAmt").getValue(),
+					// NominalCurr: "KRW",
+					TradingDate: tradingDateTimestamp,
+					PaymentDate: payMentDateTimestamp
+					// Zprice3: this.getView().byId("zprice2").getValue(),
+					// Xbnwhr: this.getView().byId("nominalAmt").getValue()
+					// Rrate: this.getView().byId("rrate").getValue()
+			};
+			console.log(oEntry);
+
+			// Create the data
+			oMainModel.create("/zDeleteSet", oEntry, {
+				success: function(oData, response) {
+					alert("성공");
+
+				},
+				error: function(oError) {
+					alert("실패");
+				},
+				async: false
+			});
+
 		}
 
-		
-		
 		// onBungae: function(oEvent){
 		// 	var sUr = "https://noams41.noaats.com:5245/sap/bc/ui2/flp?sap-client=100&sap-language=KO#TreasuryPosition-displayPostingLineItem";
 		// 	window.open(sUr, "_blank");
 		// }
 
-	
 	});
 });

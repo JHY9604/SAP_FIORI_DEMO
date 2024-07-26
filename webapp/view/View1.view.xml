@@ -17,6 +17,7 @@ displayBlock="true">
 						<Button text="새로고침"  icon="sap-icon://refresh" press="onRefresh"/>
 						<Button text="저장" icon="sap-icon://save" press="onSave"/>
 						<Button text="분개내역조회" press="onDisplayBungae"/>
+						<Button text="삭제" press="onDelete"/>
 					</HBox>
 					
 		
