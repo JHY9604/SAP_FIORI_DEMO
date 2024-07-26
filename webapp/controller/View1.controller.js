@@ -18,7 +18,7 @@ sap.ui.define([
 		var year = TodayDate.getFullYear();
 		var month = (TodayDate.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더함
 		var day = TodayDate.getDate().toString().padStart(2, '0'); // 날짜가 한 자리일 경우 앞에 0을 추가
-
+//
 // YYYY.MM.DD 형식으로 변환
 		var formattedDate = year + '.' + month + '.' + day;
 		
